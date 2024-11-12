@@ -41,4 +41,17 @@ export const SkeletonText = forwardRef<HTMLDivElement, SkeletonTextProps>(
   }
 )
 
+export const SkeletonSquare = forwardRef<HTMLDivElement, SkeletonTextProps>(
+  function SkeletonText(props, ref) {
+    const { noOfLines = 3, ...rest } = props
+    return (
+      <>
+        {Array.from({ length: noOfLines }).map((_, index) => (
+          <ChakraSkeleton ref={ref} key={index} {...props} {...rest} />
+        ))}
+      </>
+    )
+  }
+)
+
 export const Skeleton = ChakraSkeleton

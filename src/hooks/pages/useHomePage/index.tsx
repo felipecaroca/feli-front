@@ -1,20 +1,13 @@
-import { zodResolver } from '@hookform/resolvers/zod'
+import { OrganizationModel } from '@/commons'
 import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { schema, SchemaType } from './schema'
 
 export const useHomePage = () => {
   const router = useRouter()
-  const { control, handleSubmit } = useForm<SchemaType>({
-    resolver: zodResolver(schema),
-  })
 
-  const onClick = (organization: string) => router.push(`/${organization}`)
-  const onSubmit = (values: SchemaType) => onClick(values.organization)
+  const onClick = (organization: OrganizationModel) =>
+    router.push(`/${organization.id}`)
 
   return {
-    control,
-    handleSubmit,
-    onSubmit,
+    onClick,
   }
 }

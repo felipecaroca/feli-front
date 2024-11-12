@@ -1,3 +1,3 @@
 import { WithOrganizationParam } from '@/commons'
 
-export type PageProps = WithOrganizationParam
+export type PageProps =  WithOrganizationParam

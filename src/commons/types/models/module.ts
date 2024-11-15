@@ -1,6 +1,6 @@
 import { BaseModel } from './base'
 
-export type CreateModInput = {
+export type SaveModInput = {
   name: string
   prefix: string
   description?: string

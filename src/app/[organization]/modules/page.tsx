@@ -5,13 +5,13 @@ import {
   FullScreenCenterComponent,
   ModuleCardComponent,
   ConfirmationDialogComponent,
-  ModalComponent,
-  ModuleFormComponent,
+  ModuleFormModalComponent,
+  TitleComponent,
 } from '@/components'
 import { useModulesPage } from '@/hooks'
 import { FC } from 'react'
 import { PageProps } from './types'
-import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Text } from '@chakra-ui/react'
 import { SkeletonSquare } from '@/components/ui/skeleton'
 import { MAX_MODULES_ALLOWED } from '@/commons'
 
@@ -20,15 +20,20 @@ const ModulesPage: FC<PageProps> = (props) => {
     openNew,
     onOpenNew,
     onCloseNew,
+    organization,
     modules,
     loading,
-    delete: { confirmOpen, onCloseConfirm, onDelete, deleteModule, deleting },
+    create: { onCreate, creating },
+    delete: { confirmOpen, onCloseConfirm, onDelete, onDeleteModule, deleting },
   } = useModulesPage(props)
-
-  // TODO: trabajar estilos para titulos
 
   return (
     <FullScreenCenterComponent>
+      <Box mb={14}>
+        <TitleComponent>
+          Módulos de la organización {organization || ''}
+        </TitleComponent>
+      </Box>
       <Grid
         templateColumns={[
           'repeat(1, 1fr)',
@@ -53,19 +58,20 @@ const ModulesPage: FC<PageProps> = (props) => {
           <AddNewButtonComponent w={200} h={200} onClick={onOpenNew} />
         )}
       </Grid>
-      <ModalComponent {...{ open: openNew, onClose: onCloseNew }}>
-        <Text>Agregar nuevo módulo</Text>
-        <Flex justify="center" alignItems="center">
-          <Box w={['full', 'full', '80%', '60%', '40%']}>
-            <ModuleFormComponent onSubmit={(val) => console.log(val)} />
-          </Box>
-        </Flex>
-      </ModalComponent>
+      <ModuleFormModalComponent
+        {...{
+          open: openNew,
+          onClose: onCloseNew,
+          onSubmit: (val) => onCreate(val),
+          saving: creating,
+        }}
+      />
       <ConfirmationDialogComponent
         open={confirmOpen}
         onClose={onCloseConfirm}
         onCancel={onCloseConfirm}
-        onConfirm={deleteModule}
+        onConfirm={onDeleteModule}
+        loading={deleting}
       >
         <Text>
           ¿Estas seguro que deseas eliminar este modulo? esta acción no se puede

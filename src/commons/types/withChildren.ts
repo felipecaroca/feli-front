@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
 export type WithChildren = {
-  children: ReactElement | ReactElement[] 
+  children: ReactElement | ReactElement[] | string | string[]
   
 }

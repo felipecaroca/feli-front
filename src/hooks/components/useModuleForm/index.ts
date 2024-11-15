@@ -7,7 +7,7 @@ export * from './types'
 
 export const useModuleForm = () => {
   const {control, handleSubmit, } = useForm<ModuleFormType>({
-
+    mode: 'all',
     resolver: zodResolver(schema)
   })
 

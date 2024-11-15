@@ -15,10 +15,6 @@ const dummie: OrganizationModel[] = [
     id: 'local2',
     name: 'local organización 2',
   },
-  {
-    id: 'local3',
-    name: 'local lalal organización 2',
-  },
 ]
 
 export default function Home() {

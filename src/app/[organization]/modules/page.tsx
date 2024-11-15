@@ -5,20 +5,27 @@ import {
   FullScreenCenterComponent,
   ModuleCardComponent,
   ConfirmationDialogComponent,
+  ModalComponent,
+  ModuleFormComponent,
 } from '@/components'
 import { useModulesPage } from '@/hooks'
 import { FC } from 'react'
 import { PageProps } from './types'
-import { Grid, GridItem, Text } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import { SkeletonSquare } from '@/components/ui/skeleton'
 import { MAX_MODULES_ALLOWED } from '@/commons'
 
 const ModulesPage: FC<PageProps> = (props) => {
   const {
+    openNew,
+    onOpenNew,
+    onCloseNew,
     modules,
     loading,
     delete: { confirmOpen, onCloseConfirm, onDelete, deleteModule, deleting },
   } = useModulesPage(props)
+
+  // TODO: trabajar estilos para titulos
 
   return (
     <FullScreenCenterComponent>
@@ -43,14 +50,20 @@ const ModulesPage: FC<PageProps> = (props) => {
           ))
         )}
         {!loading && modules.length < MAX_MODULES_ALLOWED && (
-          <AddNewButtonComponent />
+          <AddNewButtonComponent w={200} h={200} onClick={onOpenNew} />
         )}
       </Grid>
+      <ModalComponent {...{ open: openNew, onClose: onCloseNew }}>
+        <Text>Agregar nuevo módulo</Text>
+        <Flex justify="center" alignItems="center">
+          <Box w={['full', 'full', '80%', '60%', '40%']}>
+            <ModuleFormComponent onSubmit={(val) => console.log(val)} />
+          </Box>
+        </Flex>
+      </ModalComponent>
       <ConfirmationDialogComponent
         open={confirmOpen}
-        onOpenChange={(details) => {
-          if (!details.open) onCloseConfirm()
-        }}
+        onClose={onCloseConfirm}
         onCancel={onCloseConfirm}
         onConfirm={deleteModule}
       >

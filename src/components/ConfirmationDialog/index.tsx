@@ -11,15 +11,18 @@ import {
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { Button } from '../ui/button'
+import { useModalClose } from '@/hooks'
 
 export const ConfirmationDialogComponent: FC<ComponentProps> = ({
   open,
-  onOpenChange,
+  onClose,
   children,
   onCancel,
   onConfirm,
   loading,
 }) => {
+  const { onOpenChange } = useModalClose(onClose)
+
   return (
     <DialogRoot role="alertdialog" {...{ open, onOpenChange }}>
       <DialogContent>

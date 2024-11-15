@@ -1,10 +1,16 @@
 import { getModules, ModuleModel, WithOrganizationParam } from '@/commons'
 import { useOrganizationParam } from '@/hooks'
+import { useDisclosure } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
 export const useModulesPage = (props: WithOrganizationParam) => {
   const [modules, setModules] = useState<ModuleModel[]>([])
   const [forDelete, setForDelete] = useState<ModuleModel | undefined>()
+  const {
+    onOpen: onOpenNew,
+    onClose: onCloseNew,
+    open: openNew,
+  } = useDisclosure()
 
   const [loading, setLoading] = useState<boolean>(true)
   const { organization } = useOrganizationParam(props)
@@ -28,6 +34,9 @@ export const useModulesPage = (props: WithOrganizationParam) => {
   }, [organization])
 
   return {
+    openNew,
+    onOpenNew,
+    onCloseNew,
     loading,
     modules,
     delete: {

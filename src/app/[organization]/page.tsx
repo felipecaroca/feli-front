@@ -18,7 +18,12 @@ const OrganizationPage: NextPage<PageProps> = (props) => {
       <Grid templateColumns="repeat(4, 1fr)" gap={4}>
         {menu.map((item) => (
           <GridItem key={item.name}>
-            <Button variant="outline" onClick={() => onClick(item)}>
+            <Button
+              variant="outline"
+              onClick={() => onClick(item)}
+              w={200}
+              h={200}
+            >
               {item.name}
             </Button>
           </GridItem>

@@ -10,13 +10,15 @@ export const ModuleFormModalComponent: FC<ComponentProps> = ({
   onClose,
   onSubmit,
   saving: loading,
+  defaultValues,
+  title,
 }) => {
   return (
     <ModalComponent {...{ open, onClose }}>
-      <TitleComponent>Agregar nuevo módulo</TitleComponent>
+      <TitleComponent>{title || 'Agregar nuevo módulo'}</TitleComponent>
       <Flex justify="center" alignItems="center" mt={10}>
         <Box w={['full', 'full', '80%', '60%', '40%']}>
-          <ModuleFormComponent {...{ onSubmit, loading }} />
+          <ModuleFormComponent {...{ onSubmit, loading, defaultValues }} />
         </Box>
       </Flex>
     </ModalComponent>

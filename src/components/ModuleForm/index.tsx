@@ -8,8 +8,9 @@ import { FormControllerCompnent } from '../FormController'
 export const ModuleFormComponent: FC<ComponentProps> = ({
   onSubmit,
   loading,
+  defaultValues,
 }) => {
-  const { control, handleSubmit } = useModuleForm()
+  const { control, handleSubmit } = useModuleForm(defaultValues)
 
   return (
     <Box w="full">

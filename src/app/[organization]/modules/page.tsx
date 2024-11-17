@@ -24,6 +24,7 @@ const ModulesPage: FC<PageProps> = (props) => {
     modules,
     loading,
     create: { onCreate, creating },
+    update: { onEdit, onCloseEdit, onUpdate, updating, forUpdate },
     delete: { confirmOpen, onCloseConfirm, onDelete, onDeleteModule, deleting },
   } = useModulesPage(props)
 
@@ -48,9 +49,7 @@ const ModulesPage: FC<PageProps> = (props) => {
         ) : (
           modules.map((module) => (
             <GridItem key={module.id}>
-              <ModuleCardComponent
-                {...{ module, onDelete, onEdit: () => console.log() }}
-              />
+              <ModuleCardComponent {...{ module, onDelete, onEdit }} />
             </GridItem>
           ))
         )}
@@ -64,6 +63,16 @@ const ModulesPage: FC<PageProps> = (props) => {
           onClose: onCloseNew,
           onSubmit: (val) => onCreate(val),
           saving: creating,
+        }}
+      />
+      <ModuleFormModalComponent
+        {...{
+          title: `Modificar módulo ${forUpdate?.name}`,
+          open: !!forUpdate,
+          onClose: onCloseEdit,
+          onSubmit: (val) => onUpdate(val),
+          saving: updating,
+          defaultValues: forUpdate,
         }}
       />
       <ConfirmationDialogComponent

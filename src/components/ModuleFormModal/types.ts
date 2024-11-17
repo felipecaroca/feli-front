@@ -5,4 +5,6 @@ export type ComponentProps = {
   open: boolean
   onClose():void
   saving: boolean
+  defaultValues?: ModuleFormType
+  title?: string
 }

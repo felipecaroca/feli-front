@@ -1,42 +1,26 @@
-export const Post = async <T, TT>(url: string, data: T) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+import axios from 'axios'
 
-  return response.json() as TT
+export const Post = async <T, TT>(url: string, data: T) => {
+  const response = await axios.post<TT>(url,data)
+  
+  return response.data
 }
 
 export const Put = async <T, TT>(url: string, data: T) => {
-  const response = await fetch(url, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-
-  return response.json() as TT
+  const response = await axios.put<TT>(url, data)
+ 
+  return response.data
 }
 
 
 export const Get = async <T>(url: string) => {
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: undefined
-  })
+  const response = await axios.get<T>(url)
 
-  return response.json() as T
+  return response.data
 }
 
 export const Delete = async <T>(url: string) => {
-  const response = await fetch(url, {
-    method: 'DELETE',
-    headers: undefined
-  })
+  const response = await axios.delete<T>(url)
 
-  return response.json() as T
+  return response.data
 }

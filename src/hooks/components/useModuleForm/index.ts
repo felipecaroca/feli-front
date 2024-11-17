@@ -5,9 +5,10 @@ import { ModuleFormType } from './types'
 export * from './types'
 
 
-export const useModuleForm = () => {
+export const useModuleForm = (defaultValues?: ModuleFormType) => {
   const {control, handleSubmit, } = useForm<ModuleFormType>({
     mode: 'all',
+    defaultValues,
     resolver: zodResolver(schema)
   })
 

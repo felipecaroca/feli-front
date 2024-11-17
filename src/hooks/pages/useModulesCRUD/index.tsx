@@ -35,7 +35,7 @@ export const useModulesCRUD = () => {
   ) => {
     return callUpdate(
       () => updateModuleService(organization, moduleId, data),
-      () => undefined
+      () => undefined // TODO: manejar feedback de error
     )
   }
 

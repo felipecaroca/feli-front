@@ -1,4 +1,4 @@
-import { ModuleModel, WithOrganizationParam } from '@/commons'
+import { ModuleModel, SaveModInput, WithOrganizationParam } from '@/commons'
 import { ModuleFormType, useModulesCRUD, useOrganizationParam } from '@/hooks'
 import { useDisclosure } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
@@ -6,13 +6,16 @@ import { useEffect, useState } from 'react'
 export const useModulesPage = (props: WithOrganizationParam) => {
   const [modules, setModules] = useState<ModuleModel[]>([])
   const [forDelete, setForDelete] = useState<ModuleModel | undefined>()
+  const [forUpdate, setForUpdate] = useState<ModuleModel | undefined>()
   const {
     getModules,
     createModule,
     deleteModule,
+    updateModule,
     getting,
     creating,
     deleting,
+    updating,
   } = useModulesCRUD()
   const {
     onOpen: onOpenNew,
@@ -22,15 +25,19 @@ export const useModulesPage = (props: WithOrganizationParam) => {
 
   const { organization } = useOrganizationParam(props)
 
+  const refreshModules = async () => setModules(await getModules(organization))
+
   const onDelete = (module: ModuleModel) => setForDelete(module)
+
   const onCreate = async (values: ModuleFormType) => {
     const newModule = await createModule(organization, values)
 
     if (!newModule) return
 
     onCloseNew()
-    setModules(await getModules(organization))
+    refreshModules()
   }
+
   const onDeleteModule = async () => {
     if (!forDelete) return
 
@@ -38,7 +45,20 @@ export const useModulesPage = (props: WithOrganizationParam) => {
     if (!deleted) return
 
     setForDelete(undefined)
-    setModules(await getModules(organization))
+    refreshModules()
+  }
+
+  const onEdit = (forUpdateObject: ModuleModel) => setForUpdate(forUpdateObject)
+  const onCloseEdit = () => setForUpdate(undefined)
+
+  const onUpdate = async (input: SaveModInput) => {
+    if (!forUpdate) return
+
+    const update = await updateModule(organization, forUpdate.id, input)
+    if (!update) return
+
+    setForUpdate(undefined)
+    refreshModules()
   }
 
   useEffect(() => {
@@ -53,6 +73,13 @@ export const useModulesPage = (props: WithOrganizationParam) => {
     loading: getting,
     modules,
     organization,
+    update: {
+      onEdit,
+      onCloseEdit,
+      forUpdate,
+      onUpdate,
+      updating,
+    },
     create: {
       onCreate,
       creating,

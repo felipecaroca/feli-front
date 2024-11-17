@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import { useState } from 'react'
 
 export const useLoading = () => {
@@ -13,7 +14,7 @@ export const useLoading = () => {
 
       return response
     } catch (err) {
-      console.log(err)
+      console.error('ERROR_MESSAGE', (err as AxiosError).message)
       return errFunc(err)
     } finally {
       setLoading(false)

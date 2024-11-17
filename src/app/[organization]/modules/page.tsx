@@ -1,19 +1,16 @@
 'use client'
 
 import {
-  AddNewButtonComponent,
   FullScreenCenterComponent,
-  ModuleCardComponent,
   ConfirmationDialogComponent,
   ModuleFormModalComponent,
   TitleComponent,
+  ModulesListComponent,
 } from '@/components'
 import { useModulesPage } from '@/hooks'
 import { FC } from 'react'
 import { PageProps } from './types'
-import { Box, Grid, GridItem, Text } from '@chakra-ui/react'
-import { SkeletonSquare } from '@/components/ui/skeleton'
-import { MAX_MODULES_ALLOWED } from '@/commons'
+import { Box, Text } from '@chakra-ui/react'
 
 const ModulesPage: FC<PageProps> = (props) => {
   const {
@@ -35,28 +32,9 @@ const ModulesPage: FC<PageProps> = (props) => {
           Módulos de la organización {organization || ''}
         </TitleComponent>
       </Box>
-      <Grid
-        templateColumns={[
-          'repeat(1, 1fr)',
-          'repeat(2, 1fr)',
-          'repeat(3, 1fr)',
-          'repeat(5, 1fr)',
-        ]}
-        gap={4}
-      >
-        {loading ? (
-          <SkeletonSquare w={200} h={200} />
-        ) : (
-          modules.map((module) => (
-            <GridItem key={module.id}>
-              <ModuleCardComponent {...{ module, onDelete, onEdit }} />
-            </GridItem>
-          ))
-        )}
-        {!loading && modules.length < MAX_MODULES_ALLOWED && (
-          <AddNewButtonComponent w={200} h={200} onClick={onOpenNew} />
-        )}
-      </Grid>
+      <ModulesListComponent
+        {...{ loading, onDelete, onEdit, onOpenNew, modules }}
+      />
       <ModuleFormModalComponent
         {...{
           open: openNew,

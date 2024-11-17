@@ -7,6 +7,7 @@ export const ModuleCardComponent: FC<ComponentProps> = ({
   module,
   onDelete,
   onEdit,
+  onCardClick,
 }) => {
   return (
     <Card.Root
@@ -15,28 +16,33 @@ export const ModuleCardComponent: FC<ComponentProps> = ({
       h="full"
       flexWrap="wrap"
       cursor="pointer"
+      onClick={() => onCardClick && onCardClick(module)}
     >
       <Card.Body>
         <Card.Title>{module.name}</Card.Title>
         <Card.Description>{module.description}</Card.Description>
       </Card.Body>
       <Card.Footer justifyContent="end">
-        <IconButton
-          size="sm"
-          colorPalette="blue"
-          variant="outline"
-          onClick={() => onEdit(module)}
-        >
-          <MdEdit />
-        </IconButton>
-        <IconButton
-          size="sm"
-          colorPalette="red"
-          variant="outline"
-          onClick={() => onDelete(module)}
-        >
-          <MdDelete />
-        </IconButton>
+        {onEdit && (
+          <IconButton
+            size="sm"
+            colorPalette="blue"
+            variant="outline"
+            onClick={() => onEdit(module)}
+          >
+            <MdEdit />
+          </IconButton>
+        )}
+        {onDelete && (
+          <IconButton
+            size="sm"
+            colorPalette="red"
+            variant="outline"
+            onClick={() => onDelete(module)}
+          >
+            <MdDelete />
+          </IconButton>
+        )}
       </Card.Footer>
     </Card.Root>
   )

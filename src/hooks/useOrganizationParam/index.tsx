@@ -1,18 +1,8 @@
 import { WithOrganizationParam } from '@/commons'
-import { useEffect, useState } from 'react'
+import { useParam } from '../useParam'
 
 export const useOrganizationParam = ({ params }: WithOrganizationParam) => {
-  const [organization, setOrganization] = useState<string>('')
-
-  const getOrganization = async () => {
-    const { organization } = await params
-
-    setOrganization(organization)
-  }
-
-  useEffect(() => {
-    getOrganization()
-  }, [])
+  const { param: organization } = useParam(params, 'organization')
 
   return {
     organization,

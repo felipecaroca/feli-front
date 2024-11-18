@@ -3,3 +3,9 @@ export type WithOrganizationParam = {
     organization: string 
   }
 }
+
+export type WithModuleParam = {
+  params: {
+    moduleId: string
+  }
+}

@@ -11,19 +11,24 @@ import { PageProps } from './types'
 import { useAttendPage } from '@/hooks'
 
 const AttendPage: FC<PageProps> = (props) => {
-  const { organization, modules, getting, onCardClick } = useAttendPage(props)
+  const { modules, getting, onCardClick } = useAttendPage(props)
 
   return (
     <FullScreenCenterComponent>
       <Box mb={14}>
         <TitleComponent>
-          Atención de la organización {organization || ''}
+          {getting
+            ? 'Comprobando si tienes módulos'
+            : modules?.length === 0
+              ? ''
+              : 'Selecciona el módulo de atención'}
         </TitleComponent>
       </Box>
+
       <ModulesListComponent
         {...{
           loading: getting,
-          modules,
+          modules: modules || [],
           onCardClick,
         }}
       />

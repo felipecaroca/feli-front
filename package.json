@@ -6,7 +6,8 @@
     "start:dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "snippet:add": "npx @chakra-ui/cli snippet add"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.1.1",

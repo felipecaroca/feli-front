@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react'
+import { Box, VStack, Text, Flex } from '@chakra-ui/react'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { renderAttentionName, renderAttentionNumber } from '@/commons'
@@ -9,11 +9,17 @@ export const CurrentAttentionComponent: FC<ComponentProps> = ({
   onCall,
   onOk,
   onSkip,
+  calling,
 }) => {
   return (
     <Box border="1px solid" borderColor="gray.300" borderRadius={4} p={6}>
-      <Box>Número de atención: {renderAttentionNumber(attention)}</Box>
-      <Box>Cliente: {renderAttentionName(attention)}</Box>
+      <Flex gap={2}>
+        Número de atención:
+        <Text fontWeight={600}>{renderAttentionNumber(attention)}</Text>
+      </Flex>
+      <Flex gap={2}>
+        Cliente: <Text fontWeight={600}>{renderAttentionName(attention)}</Text>
+      </Flex>
 
       <VStack gap={2} justify="center" alignItems="center" pt={20}>
         <Box w="full" maxW={300}>
@@ -23,6 +29,7 @@ export const CurrentAttentionComponent: FC<ComponentProps> = ({
             onClick={() => onCall(attention)}
             disabled={!attention}
             colorPalette="blue"
+            loading={calling}
           >
             Llamar
           </Button>

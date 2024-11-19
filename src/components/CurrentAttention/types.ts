@@ -5,4 +5,5 @@ export type ComponentProps = {
   onCall(attention?:AttentionModel):void
   onOk(attention?:AttentionModel):void
   onSkip(attention?:AttentionModel):void
+  calling?: boolean
 }

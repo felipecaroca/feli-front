@@ -9,3 +9,9 @@ export type WithModuleParam = {
     moduleId: string
   }
 }
+
+export type WithAttentionParam = {
+  params: {
+    attentionId: string
+  }
+}

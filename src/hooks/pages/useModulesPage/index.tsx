@@ -1,5 +1,5 @@
 import { ModuleModel, SaveModInput, WithOrganizationParam } from '@/commons'
-import { ModuleFormType, useModulesCRUD, useOrganizationParam } from '@/hooks'
+import { useModulesCRUD, useOrganizationParam } from '@/hooks'
 import { useDisclosure } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
@@ -29,7 +29,7 @@ export const useModulesPage = (props: WithOrganizationParam) => {
 
   const onDelete = (module: ModuleModel) => setForDelete(module)
 
-  const onCreate = async (values: ModuleFormType) => {
+  const onCreate = async (values: SaveModInput) => {
     const newModule = await createModule(organization, values)
 
     if (!newModule) return

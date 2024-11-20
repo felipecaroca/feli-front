@@ -18,5 +18,9 @@ export const changeAttentionStatusService = async (business: string, id: string,
 export const callAttentionService = async (business: string, id: string) => 
   Post<unknown, boolean>(`${url}/${business}/${id}/call`, {})
 
+export const getAttentionService = async (business: string, attentionId: string)  =>
+  Get<AttentionModel>(`${url}/${business}/attention/${attentionId}`)
+
+
 
 

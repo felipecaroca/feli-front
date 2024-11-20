@@ -3,6 +3,9 @@ import {
   AttentionStatusEnum,
   callAttentionService,
   changeAttentionStatusService,
+  CreateAttentionInput,
+  createAttentionService,
+  getAttentionService,
   getAttentionsService,
   resetAttentionService,
 } from '@/commons'
@@ -13,6 +16,8 @@ export const useAttentionsCRUD = () => {
   const { call: callReset, loading: resetting } = useLoading()
   const { call: callChange, loading: changing } = useLoading()
   const { call: callCallAttention, loading: calling } = useLoading()
+  const { call: callCreate, loading: creating } = useLoading()
+  const { call: callGetOne, loading: gettingOne } = useLoading()
 
   const getAttentions = (business: string, moduleId?: string) =>
     callGet(
@@ -26,7 +31,7 @@ export const useAttentionsCRUD = () => {
       () => false
     )
 
-  const chanAttentionStatus = (
+  const changeAttentionStatus = (
     attention: AttentionModel,
     status: AttentionStatusEnum
   ) =>
@@ -44,14 +49,30 @@ export const useAttentionsCRUD = () => {
       () => false
     )
 
+  const createAttention = (business: string, data: CreateAttentionInput) =>
+    callCreate(
+      () => createAttentionService(business, data),
+      () => undefined
+    )
+
+  const getAttention = (business: string, attentionId: string) =>
+    callGetOne(
+      () => getAttentionService(business, attentionId),
+      () => undefined
+    )
+
   return {
     getAttentions,
+    getAttention,
     resetAttention,
-    chanAttentionStatus,
+    changeAttentionStatus,
     callAttention,
+    createAttention,
     getting,
+    gettingOne,
     resetting,
     changing,
     calling,
+    creating,
   }
 }

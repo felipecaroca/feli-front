@@ -1,10 +1,11 @@
-import { ModuleFormType } from '@/hooks'
+import { SaveModInput } from '@/commons'
+
 
 export type ComponentProps = {
-  onSubmit(values: ModuleFormType): void
+  onSubmit(values: SaveModInput): void
   open: boolean
   onClose():void
   saving: boolean
-  defaultValues?: ModuleFormType
+  defaultValues?: SaveModInput
   title?: string
 }

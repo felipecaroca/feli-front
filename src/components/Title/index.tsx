@@ -3,5 +3,9 @@ import { FC } from 'react'
 import { WithChildren } from '@/commons'
 
 export const TitleComponent: FC<WithChildren> = ({ children }) => {
-  return <Heading size="2xl">{children}</Heading>
+  return (
+    <Heading size="2xl" textAlign="center">
+      {children}
+    </Heading>
+  )
 }

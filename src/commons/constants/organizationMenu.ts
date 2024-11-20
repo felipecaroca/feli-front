@@ -14,7 +14,7 @@ export const ORGANIZATION_MENU: MenuItem[] = [
     path: '/qr',
   },
   {
-    name: 'Pantallas Público',
-    path: '/attention-views',
+    name: 'Pantalla Público',
+    path: '/attention-view',
   },
 ]

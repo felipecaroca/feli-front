@@ -24,7 +24,7 @@ export const useManageAttention = ({ organization, moduleId }: HookProps) => {
   const {
     getAttentions,
     resetAttention,
-    chanAttentionStatus,
+    changeAttentionStatus,
     callAttention,
     getting,
     resetting,
@@ -37,23 +37,23 @@ export const useManageAttention = ({ organization, moduleId }: HookProps) => {
   }
 
   const onOk = async (attention?: AttentionModel) => {
-    if (attention) chanAttentionStatus(attention, AttentionStatusEnum.OK)
+    if (attention) changeAttentionStatus(attention, AttentionStatusEnum.OK)
   }
 
   const onSkip = () => setConfirmationContent(getConfirmationContent('skip'))
 
   const next = async (nextAttention: AttentionModel) =>
-    chanAttentionStatus(nextAttention, AttentionStatusEnum.ATTENDING)
+    changeAttentionStatus(nextAttention, AttentionStatusEnum.ATTENDING)
 
   const skip = async () => {
     if (!currentAttention) return
 
-    await chanAttentionStatus(currentAttention, AttentionStatusEnum.SKIPPED)
+    await changeAttentionStatus(currentAttention, AttentionStatusEnum.SKIPPED)
 
     const nextAttention = getNextOnList(waitingList)
 
     if (nextAttention)
-      await chanAttentionStatus(nextAttention, AttentionStatusEnum.ATTENDING)
+      await changeAttentionStatus(nextAttention, AttentionStatusEnum.ATTENDING)
 
     onCloseConfirmation()
   }

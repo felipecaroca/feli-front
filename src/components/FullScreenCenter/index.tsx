@@ -4,7 +4,7 @@ import { ComponentProps } from './types'
 
 export const FullScreenCenterComponent: FC<ComponentProps> = ({ children }) => {
   return (
-    <VStack w="full" h="100vh" justify="center" alignItems="center">
+    <VStack w="full" px={6} h="100vh" justify="center" alignItems="center">
       {children}
     </VStack>
   )

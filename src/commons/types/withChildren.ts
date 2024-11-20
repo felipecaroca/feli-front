@@ -1,6 +1,6 @@
-import { ReactElement } from 'react'
+import { ReactNode } from 'react'
 
 export type WithChildren = {
-  children: ReactElement | ReactElement[] | string | string[]
+  children: ReactNode
   
 }

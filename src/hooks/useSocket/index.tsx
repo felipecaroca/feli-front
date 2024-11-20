@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { io, Socket } from 'socket.io-client'
 
-export const useSocket = () => {
+export const useSocket = (lazy?: boolean) => {
   const [socket, setSocket] = useState<Socket | undefined>(undefined)
-  useEffect(() => {
-    const socketInstance = io(process.env.NEXT_PUBLIC_WAITING_LINE_BACK)
+
+  const connectSocket = <T extends { [key: string]: unknown }>(query?: T) => {
+    const socketInstance = io(process.env.NEXT_PUBLIC_WAITING_LINE_BACK, {
+      query,
+    })
 
     socketInstance.on('connect', () => {
       console.log('conectado')
@@ -15,12 +18,16 @@ export const useSocket = () => {
       console.log('desconectado')
     })
 
+    return socketInstance
+  }
+
+  useEffect(() => {
+    if (!lazy) connectSocket()
+
     return () => {
-      socketInstance.close()
+      socket?.close()
     }
   }, [])
 
-  return {
-    socket,
-  }
+  return { socket, connectSocket }
 }

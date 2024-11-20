@@ -9,7 +9,7 @@ export const useQrCodePage = (props: WithOrganizationParam) => {
   useEffect(() => {
     if (organization)
       setQrValue(
-        `${process.env.WAITING_LINE_FRONT}/${organization}/take-attention?id=12345674897546132`
+        `${process.env.NEXT_PUBLIC_WAITING_LINE_FRONT}/${organization}/take-attention?id=12345674897546132`
       )
   }, [organization])
 

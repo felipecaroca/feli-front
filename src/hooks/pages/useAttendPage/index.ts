@@ -10,6 +10,7 @@ export const useAttendPage = (props: WithOrganizationParam) => {
   const router = useRouter()
 
   const onCardClick = (module?: ModuleModel) => router.push(`manage-attention/${module?.id || ''}`)
+  const hasModules = (modules?.length ||0) > 0
 
 
   useEffect(() => {
@@ -25,6 +26,7 @@ export const useAttendPage = (props: WithOrganizationParam) => {
     organization,
     modules, 
     getting,
+    hasModules,
     onCardClick,
   }
 }

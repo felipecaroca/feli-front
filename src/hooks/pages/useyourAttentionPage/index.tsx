@@ -18,10 +18,15 @@ export const useYourAttentionPage = (
   const [attention, setAttention] = useState<AttentionModel | undefined>()
   const { organization } = useOrganizationParam(props)
   const { attentionId } = useAttentionIdParam(props)
+  const [audioAccepted, setAudioAccepted] = useState<boolean>(false)
   const { getAttention, gettingOne } = useAttentionsCRUD()
   const { connectSocket } = useSocket(true)
+  const { notify, playSound, isServiceWorkerCompatible } = useNotification()
 
-  const { notify } = useNotification()
+  const acceptAudio = () => {
+    setAudioAccepted(true)
+    playSound()
+  }
 
   useEffect(() => {
     if (organization && attentionId)
@@ -34,12 +39,18 @@ export const useYourAttentionPage = (
     if (attention) {
       const socket = connectSocket({ attentionId: attention.id })
 
-      socket.on('message', (lala) => notify(lala))
+      socket.on('message', (attention: AttentionModel) => {
+        setAttention(attention)
+        notify(attention.status, audioAccepted)
+      })
     }
-  }, [attention])
+  }, [attention, audioAccepted])
 
   return {
     attention,
     loading: gettingOne,
+    acceptAudio,
+    audioAccepted,
+    isServiceWorkerCompatible,
   }
 }

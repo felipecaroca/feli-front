@@ -14,7 +14,7 @@ export const useTakeAttentionPage = (props: WithOrganizationParam) => {
 
     if(!attention) return
 
-    router.replace(`take-attention/${attention.id}`)
+    router.replace(`attention-view/${attention.id}`)
   }
 
   return {

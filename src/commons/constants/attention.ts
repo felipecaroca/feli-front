@@ -1,4 +1,4 @@
-import { ConfirmActionType, ConfirmationType } from '../types'
+import { AttentionStatusEnum, ConfirmActionType, ConfirmationType } from '../types'
 
 export const CONFIRMATION_CONTENTS: ConfirmationType<ConfirmActionType>[] = [
   {
@@ -10,3 +10,17 @@ export const CONFIRMATION_CONTENTS: ConfirmationType<ConfirmActionType>[] = [
     action: 'skip',
   },
 ]
+
+export const ATTENTION_STATUS = {
+  [AttentionStatusEnum.ATTENDING]: 'Atendiendo',
+  [AttentionStatusEnum.SKIPPED]: 'Perdido',
+  [AttentionStatusEnum.WAITING]: 'Esperando',
+  [AttentionStatusEnum.OK]: 'Finalizado'
+}
+
+export const ATTENTION_STATUS_COLORS = {
+  [AttentionStatusEnum.ATTENDING]: 'blue.100',
+  [AttentionStatusEnum.SKIPPED]: 'red.400',
+  [AttentionStatusEnum.WAITING]: 'gray.200',
+  [AttentionStatusEnum.OK]: 'green.200'
+}

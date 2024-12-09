@@ -1,4 +1,4 @@
-import { CreateAttentionInput } from "@/commons"
+import { CreateAttentionInput } from '@/commons'
 
 
 export type ComponentProps = {

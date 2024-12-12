@@ -80,11 +80,7 @@ const ManageAttentionPage: FC<PageProps> = (props) => {
             <AttentionListComponent {...{ attentions, getting }} />
           </Box>
           <Flex justify="center" py={4}>
-            <Button
-              colorPalette="red"
-              onClick={onReset}
-              disabled={noAttentionsAvailable || resetting}
-            >
+            <Button colorPalette="red" onClick={onReset} disabled={resetting}>
               Resetear lista
             </Button>
           </Flex>

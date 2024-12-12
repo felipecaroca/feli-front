@@ -16,6 +16,7 @@ import { Alert } from '@/components/ui/alert'
 
 const ManageModuleAttentionPage: FC<PageProps> = (props) => {
   const {
+    module,
     attentions,
     noAttentionsAvailable,
     currentAttention,
@@ -36,7 +37,9 @@ const ManageModuleAttentionPage: FC<PageProps> = (props) => {
   return (
     <FullScreenCenterComponent>
       <Box mb={14}>
-        <TitleComponent>Atención de clientes</TitleComponent>
+        <TitleComponent>
+          Atención de clientes {module ? `${module.name}` : ''}
+        </TitleComponent>
       </Box>
       <Box>
         {noAttentionsAvailable && (

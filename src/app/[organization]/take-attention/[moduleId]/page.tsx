@@ -11,9 +11,9 @@ import { useTakeAttentionPage } from '@/hooks'
 
 import { FC } from 'react'
 
-const TakeAttetionPage: FC<WithOrganizationParam & WithModuleParam> = (
-  props
-) => {
+const TakeAttetionWithModulePage: FC<
+  WithOrganizationParam & WithModuleParam
+> = (props) => {
   const { onSubmit, creating: loading } = useTakeAttentionPage(props)
 
   return (
@@ -27,4 +27,4 @@ const TakeAttetionPage: FC<WithOrganizationParam & WithModuleParam> = (
   )
 }
 
-export default TakeAttetionPage
+export default TakeAttetionWithModulePage

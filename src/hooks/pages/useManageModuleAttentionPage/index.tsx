@@ -1,5 +1,6 @@
 import {
   AttentionModel,
+  ModuleModel,
   WithModuleParam,
   WithOrganizationParam,
 } from '@/commons'
@@ -8,15 +9,23 @@ import {
   useModuleIdParam,
   useManageAttention,
   useSocket,
+  useModulesCRUD,
 } from '@/hooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const useManageModuleAttentionPage = (
   props: WithModuleParam & WithOrganizationParam
 ) => {
+  const [module, setModule] = useState<ModuleModel | undefined>()
   const { organization } = useOrganizationParam(props)
   const { moduleId } = useModuleIdParam(props)
+  const { getModule } = useModulesCRUD()
   const { socket } = useSocket()
+
+  useEffect(() => {
+    if (moduleId && organization)
+      getModule(organization, moduleId).then((res) => setModule(res))
+  }, [organization, moduleId])
 
   const {
     setAttentions,
@@ -51,6 +60,7 @@ export const useManageModuleAttentionPage = (
   }, [socket, organization, moduleId])
 
   return {
+    module,
     setAttentions,
     attentions,
     noAttentionsAvailable,

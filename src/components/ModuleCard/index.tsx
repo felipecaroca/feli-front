@@ -8,6 +8,7 @@ export const ModuleCardComponent: FC<ComponentProps> = ({
   onDelete,
   onEdit,
   onCardClick,
+  ...cardRootProps
 }) => {
   return (
     <Card.Root
@@ -16,11 +17,14 @@ export const ModuleCardComponent: FC<ComponentProps> = ({
       h="full"
       flexWrap="wrap"
       cursor="pointer"
+      {...cardRootProps}
       onClick={() => onCardClick && onCardClick(module)}
     >
       <Card.Body>
         <Card.Title>{module.name}</Card.Title>
-        <Card.Description>{module.description}</Card.Description>
+        <Card.Description overflowY="auto">
+          {module.description}
+        </Card.Description>
       </Card.Body>
       <Card.Footer justifyContent="end">
         {onEdit && (

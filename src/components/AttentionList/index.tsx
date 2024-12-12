@@ -22,6 +22,7 @@ export const AttentionListComponent: FC<ComponentProps> = ({
             borderBottomColor="gray.300"
           >
             <Box fontWeight={600}>{renderAttentionNumber(attention)}</Box>
+            {attention.module && <Box>{attention.module.name}</Box>}
             <Box>{renderAttentionName(attention)}</Box>
           </Flex>
         ))

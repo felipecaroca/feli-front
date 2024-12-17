@@ -8,6 +8,7 @@ import { useIsFullScreen, useQrCodePage } from '@/hooks'
 import { FullScreenCenterComponent } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
+import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 
 const QrCodePage: FC<PageProps> = (props) => {
   const { qrValue: value } = useQrCodePage(props)
@@ -24,32 +25,40 @@ const QrCodePage: FC<PageProps> = (props) => {
   const showForManager = !hidden && !isFullScreen
 
   return (
-    <FullScreenCenterComponent>
-      <Box>
-        {showForManager && (
-          <Alert>
-            Puedes presionar <chakra.span fontWeight={700}>F11</chakra.span>{' '}
-            para mostrar esta pantalla al público
-          </Alert>
-        )}
-      </Box>
-      <Text py="6">Escanea este código para obtener el turno de atención</Text>
-      <>
-        {value && (
-          <>
-            <Box border="1px dashed #000" p={4}>
-              <QRCode {...{ value }} />
-            </Box>
+    <ProtectedRouteComponent {...{ hideUserSession: !showForManager }}>
+      <FullScreenCenterComponent>
+        <Box>
+          {showForManager && (
+            <Alert>
+              Puedes presionar <chakra.span fontWeight={700}>F11</chakra.span>{' '}
+              para mostrar esta pantalla al público
+            </Alert>
+          )}
+        </Box>
+        <Text py="6">
+          Escanea este código para obtener el turno de atención
+        </Text>
+        <>
+          {value && (
+            <>
+              <Box border="1px dashed #000" p={4}>
+                <QRCode {...{ value }} />
+              </Box>
 
-            {!hidden && showForManager && (
-              <Button my="4" variant="outline" onClick={() => setHidden(true)}>
-                Imprimir
-              </Button>
-            )}
-          </>
-        )}
-      </>
-    </FullScreenCenterComponent>
+              {!hidden && showForManager && (
+                <Button
+                  my="4"
+                  variant="outline"
+                  onClick={() => setHidden(true)}
+                >
+                  Imprimir
+                </Button>
+              )}
+            </>
+          )}
+        </>
+      </FullScreenCenterComponent>
+    </ProtectedRouteComponent>
   )
 }
 

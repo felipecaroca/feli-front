@@ -5,6 +5,7 @@ import {
   FullScreenCenterComponent,
   OrganizationCardComponent,
 } from '@/components'
+import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 
 import { useHomePage } from '@/hooks'
 import { Grid, GridItem } from '@chakra-ui/react'
@@ -21,14 +22,16 @@ export default function Home() {
   const { onClick } = useHomePage()
 
   return (
-    <FullScreenCenterComponent>
-      <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-        {dummie.map((organization) => (
-          <GridItem key={organization.id}>
-            <OrganizationCardComponent {...{ organization, onClick }} />
-          </GridItem>
-        ))}
-      </Grid>
-    </FullScreenCenterComponent>
+    <ProtectedRouteComponent>
+      <FullScreenCenterComponent>
+        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+          {dummie.map((organization) => (
+            <GridItem key={organization.id}>
+              <OrganizationCardComponent {...{ organization, onClick }} />
+            </GridItem>
+          ))}
+        </Grid>
+      </FullScreenCenterComponent>
+    </ProtectedRouteComponent>
   )
 }

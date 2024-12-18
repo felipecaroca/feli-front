@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:dev": "next dev",
+    "start:dev": "set TZ=UTC && nest start --watch",
     "build": "next build",
-    "start": "next start",
+    "gcp-build": "pnpm build",
+    "start": "node dist/main",
     "lint": "next lint",
     "snippet:add": "npx @chakra-ui/cli snippet add"
   },

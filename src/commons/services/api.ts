@@ -2,8 +2,7 @@ import axios from 'axios'
 import { getFromLocalStorage } from '../utils'
 
 const getHeaders = () => {
-  const token = JSON.parse(getFromLocalStorage('AUTH_TOKEN')||'')
-
+  const token = JSON.parse((getFromLocalStorage('AUTH_TOKEN') || '""'))
   return {
     Authorization: `Bearer ${token}`
   }
@@ -29,7 +28,6 @@ export const Put = async <T, TT>(url: string, data: T) => {
 
 
 export const Get = async <T>(url: string) => {
-
   const response = await axios.get<T>(url, {
     headers: getHeaders()
   })

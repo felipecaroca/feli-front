@@ -7,6 +7,7 @@ import { useGoogleOneTapLogin } from '@react-oauth/google'
 import { useRouter } from 'next/navigation'
 
 import { useEffect } from 'react'
+import styles from './styles.module.css'
 
 const LoginPage = () => {
   const { saveToken, logout } = useSession()
@@ -45,6 +46,7 @@ const LoginPage = () => {
         display="flex"
         alignItems="center"
         transform="rotate(-5deg)"
+        className={styles.arrow1}
       >
         <Box
           bg="red.600"
@@ -63,9 +65,11 @@ const LoginPage = () => {
         zIndex={1}
         position="fixed"
         right="28%"
+        top="48%"
         display="flex"
         alignItems="center"
         transform="rotate(-40deg)"
+        className={styles.arrow2}
       >
         <Box
           bg="red.600"

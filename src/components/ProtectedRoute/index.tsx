@@ -1,8 +1,8 @@
 import { useSession } from '@/hooks'
 import { Box } from '@chakra-ui/react'
 import { FC } from 'react'
-import { Button } from '../ui/button'
 import { ComponentProps } from './types'
+import { MenuComponent } from '../Menu'
 
 export const ProtectedRouteComponent: FC<ComponentProps> = ({
   children,
@@ -14,11 +14,7 @@ export const ProtectedRouteComponent: FC<ComponentProps> = ({
     <>
       {user ? (
         <Box>
-          {!hideUserSession && (
-            <Button m={8} onClick={logout}>
-              Cerrar Sesión
-            </Button>
-          )}
+          {!hideUserSession && <MenuComponent {...{ user, logout }} />}
           {children}
         </Box>
       ) : null}

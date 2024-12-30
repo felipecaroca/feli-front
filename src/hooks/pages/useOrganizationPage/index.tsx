@@ -1,16 +1,21 @@
-import { MenuItem, WithOrganizationParam } from '@/commons'
-import { useOrganizationParam } from '@/hooks'
-import { useRouter } from 'next/navigation'
+import { OrganizationModel } from '@/commons'
+import { useOrganizationCRUD } from '@/hooks/useOrganizationCRUD'
+import { useEffect, useState } from 'react'
 
-export const useOrganizationPage = (props: WithOrganizationParam) => {
-  const router = useRouter()
-  const { organization } = useOrganizationParam(props)
+export const useOrganizationPage = () => {
+  const [myOrganizations, setMyOrganizations] = useState<
+    OrganizationModel[] | undefined
+  >(undefined)
+  const { getMyOrganizations, getting } = useOrganizationCRUD()
 
-  const onClick = (item: MenuItem) => {
-    router.push(`${organization}/${item.path}`)
-  }
+  useEffect(() => {
+    getMyOrganizations().then((organizations) =>
+      setMyOrganizations(organizations || [])
+    )
+  }, [])
 
   return {
-    onClick,
+    myOrganizations,
+    getting,
   }
 }

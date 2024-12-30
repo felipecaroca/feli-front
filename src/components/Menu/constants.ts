@@ -1,27 +1,31 @@
+import { ORGANIZATION_URL, WAITINGLINE_URL } from "@/commons";
 import { MenuSectionType } from "./types";
 
 export const sections: MenuSectionType[] = [
   {
     value: 'A',
     title: 'Organización',
-    items: [{ id: 'A-NEXT', name: 'Proximamente...', onClick: '/' }],
+    items: [
+      { id: 'A-ORGANIZATION', name: 'Nueva Organización', onClick:`${ORGANIZATION_URL}/create`},
+      { id: 'A-CREATE-ORG', name: 'Ver Organizaciones', onClick: ORGANIZATION_URL}
+    ],
   },
   {
     value: 'B',
     title: 'Atención a clientes',
     items: [
-      { id: 'B-SELECT-ORG', name: 'Seleccionar organización', onClick: '/' },
+      { id: 'B-SELECT-ORG', name: 'Seleccionar organización', onClick: `${WAITINGLINE_URL}` },
       {
         id: 'B-MODULES',
         name: 'Módulos de atención',
-        onClick: '/{org}/modules',
+        onClick: `${WAITINGLINE_URL}/{org}/modules`,
       },
-      { id: 'B-ATTEND', name: 'Atender clientes', onClick: '/{org}/attend' },
-      { id: 'B-QR', name: 'Código QR', onClick: '/{org}/qr' },
+      { id: 'B-ATTEND', name: 'Atender clientes', onClick: `${WAITINGLINE_URL}/{org}/attend` },
+      { id: 'B-QR', name: 'Código QR', onClick: `${WAITINGLINE_URL}/{org}/qr` },
       {
         id: 'B-ATTENTION-VIEW',
         name: 'Sala de espera',
-        onClick: '/{org}/attention-view',
+        onClick: `${WAITINGLINE_URL}/{org}/attention-view`,
       },
     ],
   },

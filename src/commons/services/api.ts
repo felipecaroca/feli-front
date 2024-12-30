@@ -8,8 +8,6 @@ const getHeaders = () => {
   }
 }
 
-
-
 export const Post = async <T, TT>(url: string, data: T) => {
   const response = await axios.post<TT>(url, data, {
     headers: getHeaders()

@@ -1,12 +1,12 @@
 import { MenuItem } from '../types'
 
-export const ORGANIZATION_MENU: MenuItem[] = [
+export const WAITINGLINE_MENU: MenuItem[] = [
   {
-    name: 'Módulos',
+    name: 'Módulos de atención',
     path: '/modules',
   },
   {
-    name: 'Atender',
+    name: 'Atender clientes',
     path: '/attend',
   },
   {
@@ -14,7 +14,7 @@ export const ORGANIZATION_MENU: MenuItem[] = [
     path: '/qr',
   },
   {
-    name: 'Pantalla Público',
+    name: 'Sala de espera',
     path: '/attention-view',
   },
 ]

@@ -6,7 +6,7 @@ export const useLoading = () => {
 
   const call = async <T, TT>(
     func: () => Promise<T>,
-    errFunc: (error: unknown) => TT
+    errFunc: (error: AxiosError<{ message: string }>) => TT
   ) => {
     try {
       setLoading(true)
@@ -14,8 +14,11 @@ export const useLoading = () => {
 
       return response
     } catch (err) {
-      console.error('ERROR_MESSAGE', (err as AxiosError).message)
-      return errFunc(err)
+      console.error(
+        'ERROR_MESSAGE',
+        (err as AxiosError<{ message: string }>).response?.data?.message
+      )
+      return errFunc(err as AxiosError<{ message: string }>)
     } finally {
       setLoading(false)
     }

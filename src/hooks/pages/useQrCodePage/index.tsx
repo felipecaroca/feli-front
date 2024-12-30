@@ -1,4 +1,4 @@
-import { WithOrganizationParam } from '@/commons'
+import { WAITINGLINE_URL, WithOrganizationParam } from '@/commons'
 import { useOrganizationParam } from '@/hooks/useOrganizationParam'
 import { useEffect, useState } from 'react'
 
@@ -9,7 +9,7 @@ export const useQrCodePage = (props: WithOrganizationParam) => {
   useEffect(() => {
     if (organization)
       setQrValue(
-        `${process.env.NEXT_PUBLIC_WAITING_LINE_FRONT}/${organization}/take-attention/check`
+        `${process.env.NEXT_PUBLIC_WAITING_LINE_FRONT}/${WAITINGLINE_URL}/${organization}/take-attention/check`
       )
   }, [organization])
 

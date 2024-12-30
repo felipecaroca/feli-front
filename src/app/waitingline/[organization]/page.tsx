@@ -4,15 +4,15 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { PageProps } from './types'
 import { FullScreenCenterComponent } from '@/components'
-import { useOrganizationPage } from '@/hooks'
-import { ORGANIZATION_MENU } from '@/commons'
+import { useBusinessPage } from '@/hooks'
+import { WAITINGLINE_MENU } from '@/commons'
 import { Button } from '@/components/ui/button'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 
-const menu = ORGANIZATION_MENU
+const menu = WAITINGLINE_MENU
 
-const OrganizationPage: NextPage<PageProps> = (props) => {
-  const { onClick } = useOrganizationPage(props)
+const BusinessPage: NextPage<PageProps> = (props) => {
+  const { onClick } = useBusinessPage(props)
 
   return (
     <ProtectedRouteComponent>
@@ -36,4 +36,4 @@ const OrganizationPage: NextPage<PageProps> = (props) => {
   )
 }
 
-export default OrganizationPage
+export default BusinessPage

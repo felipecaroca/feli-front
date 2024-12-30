@@ -1,5 +1,6 @@
 import {
   CreateAttentionInput,
+  WAITINGLINE_URL,
   WithModuleParam,
   WithOrganizationParam,
 } from '@/commons'
@@ -25,7 +26,9 @@ export const useTakeAttentionPage = (
 
     if (!attention) return
 
-    router.replace(`/${organization}/attention-view/${attention.id}`)
+    router.replace(
+      `${WAITINGLINE_URL}/${organization}/attention-view/${attention.id}`
+    )
   }
 
   return {

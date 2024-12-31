@@ -1,3 +1,5 @@
+'use client'
+
 import { MenuItem, WithOrganizationParam } from '@/commons'
 import { useOrganizationParam } from '@/hooks'
 import { useRouter } from 'next/navigation'

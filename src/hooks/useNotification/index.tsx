@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { toaster } from '@/components/ui/toaster'
 import { NOTIFICATIONS } from './notifications'

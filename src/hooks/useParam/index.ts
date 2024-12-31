@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 
 export const useParam = <T,>(params: T, key: keyof T) => {

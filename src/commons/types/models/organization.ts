@@ -6,7 +6,7 @@ export type CreateOrganizationInput = {
 
 export type UpdateOrganizationInput = {
   name?: string
-  userIds?: string[]
+  userEmails?: string[]
 }
 
 

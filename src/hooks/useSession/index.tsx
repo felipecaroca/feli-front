@@ -1,3 +1,5 @@
+'use client'
+
 import { authTokenAtom, authUserAtom, getMe } from '@/commons'
 import { useAtom } from 'jotai'
 import { useRouter } from 'next/navigation'

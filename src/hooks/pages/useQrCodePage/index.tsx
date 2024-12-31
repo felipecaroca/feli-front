@@ -1,3 +1,5 @@
+'use client'
+
 import { WAITINGLINE_URL, WithOrganizationParam } from '@/commons'
 import { useOrganizationParam } from '@/hooks/useOrganizationParam'
 import { useEffect, useState } from 'react'

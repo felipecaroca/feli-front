@@ -1,3 +1,5 @@
+'use client'
+
 import { ModuleModel, WithOrganizationParam } from '@/commons'
 import { useModulesCRUD, useOrganizationParam } from '@/hooks'
 

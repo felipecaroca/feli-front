@@ -1,35 +1,33 @@
 'use client'
 
-import { OrganizationModel } from '@/commons'
 import {
   FullScreenCenterComponent,
   OrganizationCardComponent,
 } from '@/components'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
+import { SkeletonSquare } from '@/components/ui/skeleton'
 
 import { useHomePage } from '@/hooks'
 import { Grid, GridItem } from '@chakra-ui/react'
 
-const dummie: OrganizationModel[] = [
-  { id: 'local1', name: 'local1' },
-  {
-    id: 'local2',
-    name: 'local organización 2',
-  },
-]
-
 export default function Home() {
-  const { onClick } = useHomePage()
+  const { onClick, getting, organizations } = useHomePage()
 
   return (
     <ProtectedRouteComponent>
       <FullScreenCenterComponent>
         <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-          {dummie.map((organization) => (
-            <GridItem key={organization.id}>
-              <OrganizationCardComponent {...{ organization, onClick }} />
-            </GridItem>
-          ))}
+          {getting ? (
+            <SkeletonSquare noOfLines={2} w="200px" h="200px" />
+          ) : (
+            organizations?.map((organization) => (
+              <GridItem key={organization.id}>
+                <OrganizationCardComponent
+                  {...{ organization, onCardClick: onClick }}
+                />
+              </GridItem>
+            ))
+          )}
         </Grid>
       </FullScreenCenterComponent>
     </ProtectedRouteComponent>

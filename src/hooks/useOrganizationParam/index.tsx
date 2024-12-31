@@ -1,3 +1,5 @@
+'use client'
+
 import { organizationAtom, WithOrganizationParam } from '@/commons'
 import { useParam } from '../useParam'
 import { useSetAtom } from 'jotai'

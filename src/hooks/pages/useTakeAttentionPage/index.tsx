@@ -1,3 +1,5 @@
+'use client'
+
 import {
   CreateAttentionInput,
   WAITINGLINE_URL,

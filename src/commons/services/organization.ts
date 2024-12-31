@@ -3,6 +3,8 @@ import { Get, Post, Put, Delete } from './api'
 
 const url = `${process.env.NEXT_PUBLIC_ORGANIZATION_BACK || ''}/organization`
 
+export const getOrganizationByIdService = async (id: string) => Get<OrganizationModel>(`${url}/${id}`)
+
 export const createOrganizationService = async (data: CreateOrganizationInput) => 
   Post<CreateOrganizationInput, OrganizationModel>(`${url}`, data)
 

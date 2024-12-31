@@ -1,3 +1,5 @@
+'use client'
+
 import { ModuleModel, SaveModInput, WithOrganizationParam } from '@/commons'
 import { useModulesCRUD, useOrganizationParam } from '@/hooks'
 import { useDisclosure } from '@chakra-ui/react'

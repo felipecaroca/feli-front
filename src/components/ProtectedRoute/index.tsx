@@ -1,3 +1,5 @@
+'use client'
+
 import { useSession } from '@/hooks'
 import { Box } from '@chakra-ui/react'
 import { FC } from 'react'

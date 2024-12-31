@@ -8,6 +8,7 @@ import {
   getModuleService,
 } from '@/commons'
 import { useLoading } from '../useLoading'
+import { toaster } from '@/components/ui/toaster'
 
 export const useModulesCRUD = () => {
   const { loading: getting, call: callGet } = useLoading()
@@ -33,7 +34,12 @@ export const useModulesCRUD = () => {
   const createModule = async (organization: string, data: SaveModInput) => {
     return callCreate(
       () => createModuleService(organization, data),
-      () => undefined // TODO: manejar feedback de error
+      () =>
+        toaster.create({
+          title: 'Error al crear',
+          type: 'error',
+          description: 'No se pudo crear el módulo, intente mas tarde',
+        })
     )
   }
 
@@ -44,14 +50,24 @@ export const useModulesCRUD = () => {
   ) => {
     return callUpdate(
       () => updateModuleService(organization, moduleId, data),
-      () => undefined // TODO: manejar feedback de error
+      () =>
+        toaster.create({
+          title: 'Error al actualizar',
+          type: 'error',
+          description: 'No se pudo actualizar el módulo, intente mas tarde',
+        })
     )
   }
 
   const deleteModule = async (organization: string, moduleId: string) => {
     return callDelete(
       () => deleteModuleService(organization, moduleId),
-      () => undefined // TODO: manejar feedback de error
+      () =>
+        toaster.create({
+          title: 'Error al eliminar',
+          type: 'error',
+          description: 'No se pudo eliminar el módulo, intente mas tarde',
+        })
     )
   }
 

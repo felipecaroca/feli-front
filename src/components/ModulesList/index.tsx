@@ -1,4 +1,4 @@
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import { SkeletonSquare } from '../ui/skeleton'
 import { ModuleCardComponent } from '../ModuleCard'
 import { AddNewButtonComponent } from '../AddNewButton'
@@ -13,27 +13,22 @@ export const ModulesListComponent: FC<ComponentProps> = ({
   ...clickOrModify
 }) => {
   return (
-    <Grid
-      templateColumns={[
-        'repeat(1, 1fr)',
-        'repeat(2, 1fr)',
-        'repeat(3, 1fr)',
-        'repeat(5, 1fr)',
-      ]}
-      gap={4}
-    >
+    <Flex gap={4} justify="center" align="center" wrap="wrap">
       {loading ? (
         <SkeletonSquare w={200} h={200} />
       ) : (
         modules.map((module) => (
-          <GridItem key={module.id}>
-            <ModuleCardComponent {...{ module, ...clickOrModify }} />
-          </GridItem>
+          <ModuleCardComponent
+            w="200px"
+            h="200px"
+            key={module.id}
+            {...{ module, ...clickOrModify }}
+          />
         ))
       )}
       {onOpenNew && !loading && modules.length < MAX_MODULES_ALLOWED && (
         <AddNewButtonComponent w={200} h={200} onClick={onOpenNew} />
       )}
-    </Grid>
+    </Flex>
   )
 }

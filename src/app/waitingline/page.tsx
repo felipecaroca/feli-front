@@ -1,34 +1,40 @@
 'use client'
 
-import {
-  FullScreenCenterComponent,
-  OrganizationCardComponent,
-} from '@/components'
+import { WAITINGLINE_MENU } from '@/commons'
+import { FullScreenCenterComponent } from '@/components'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
-import { SkeletonSquare } from '@/components/ui/skeleton'
+import { Button } from '@/components/ui/button'
 
 import { useHomePage } from '@/hooks'
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
+
+const menu = WAITINGLINE_MENU
 
 export default function Home() {
-  const { onClick, getting, organizations } = useHomePage()
+  const { onClick } = useHomePage()
 
   return (
     <ProtectedRouteComponent>
       <FullScreenCenterComponent>
-        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-          {getting ? (
-            <SkeletonSquare noOfLines={2} w="200px" h="200px" />
-          ) : (
-            organizations?.map((organization) => (
-              <GridItem key={organization.id}>
-                <OrganizationCardComponent
-                  {...{ organization, onCardClick: onClick }}
-                />
-              </GridItem>
-            ))
-          )}
-        </Grid>
+        <Flex
+          wrap="wrap"
+          gap={4}
+          justify="center"
+          align="center"
+          mt={['200px', 'unset']}
+        >
+          {menu.map((item) => (
+            <Button
+              key={item.name}
+              variant="outline"
+              onClick={() => onClick(item)}
+              w="200px"
+              h="200px"
+            >
+              {item.name}
+            </Button>
+          ))}
+        </Flex>
       </FullScreenCenterComponent>
     </ProtectedRouteComponent>
   )

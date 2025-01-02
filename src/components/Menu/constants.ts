@@ -7,25 +7,24 @@ export const sections: MenuSectionType[] = [
     title: 'Organización',
     items: [
       { id: 'A-ORGANIZATION', name: 'Nueva Organización', onClick:`${ORGANIZATION_URL}/create`},
-      { id: 'A-CREATE-ORG', name: 'Ver Organizaciones', onClick: ORGANIZATION_URL}
+      { id: 'A-CREATE-ORG', name: 'Ver Organizaciones', onClick: ORGANIZATION_URL},
     ],
   },
   {
     value: 'B',
     title: 'Atención a clientes',
-    items: [
-      { id: 'B-SELECT-ORG', name: 'Seleccionar organización', onClick: `${WAITINGLINE_URL}` },
+    items: [      
       {
         id: 'B-MODULES',
         name: 'Módulos de atención',
-        onClick: `${WAITINGLINE_URL}/{org}/modules`,
+        onClick: `${WAITINGLINE_URL}/modules`,
       },
-      { id: 'B-ATTEND', name: 'Atender clientes', onClick: `${WAITINGLINE_URL}/{org}/attend` },
-      { id: 'B-QR', name: 'Código QR', onClick: `${WAITINGLINE_URL}/{org}/qr` },
+      { id: 'B-ATTEND', name: 'Atender clientes', onClick: `${WAITINGLINE_URL}/attend` },
+      { id: 'B-QR', name: 'Código QR', onClick: `${WAITINGLINE_URL}/qr` },
       {
         id: 'B-ATTENTION-VIEW',
         name: 'Sala de espera',
-        onClick: `${WAITINGLINE_URL}/{org}/attention-view`,
+        onClick: `${WAITINGLINE_URL}/attention-view`,
       },
     ],
   },

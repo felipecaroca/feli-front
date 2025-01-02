@@ -3,31 +3,30 @@
 import {
   AttentionModel,
   ModuleModel,
+  organizationAtom,
   WithModuleParam,
-  WithOrganizationParam,
 } from '@/commons'
 import {
-  useOrganizationParam,
   useModuleIdParam,
   useManageAttention,
   useSocket,
   useModulesCRUD,
 } from '@/hooks'
+import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 
-export const useManageModuleAttentionPage = (
-  props: WithModuleParam & WithOrganizationParam
-) => {
+export const useManageModuleAttentionPage = (props: WithModuleParam) => {
   const [module, setModule] = useState<ModuleModel | undefined>()
-  const { organization } = useOrganizationParam(props)
+  const currentOrganization = useAtomValue(organizationAtom)
   const { moduleId } = useModuleIdParam(props)
   const { getModule } = useModulesCRUD()
   const { socket } = useSocket()
+  const organizationId = currentOrganization?.id || ''
 
   useEffect(() => {
-    if (moduleId && organization)
-      getModule(organization, moduleId).then((res) => setModule(res))
-  }, [organization, moduleId])
+    if (moduleId && organizationId)
+      getModule(organizationId, moduleId).then((res) => setModule(res))
+  }, [organizationId, moduleId])
 
   const {
     setAttentions,
@@ -46,12 +45,12 @@ export const useManageModuleAttentionPage = (
     resetting,
     changing,
     calling,
-  } = useManageAttention({ organization, moduleId })
+  } = useManageAttention({ organization: organizationId, moduleId })
 
   useEffect(() => {
-    if (socket && organization && moduleId)
+    if (socket && organizationId && moduleId)
       socket.on(
-        `${organization}-attentions-${moduleId}`,
+        `${organizationId}-attentions-${moduleId}`,
         (data: AttentionModel) => {
           setAttentions((prev) => [
             ...prev.filter((i) => i.id !== data.id),
@@ -59,7 +58,7 @@ export const useManageModuleAttentionPage = (
           ])
         }
       )
-  }, [socket, organization, moduleId])
+  }, [socket, organizationId, moduleId])
 
   return {
     module,

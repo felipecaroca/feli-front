@@ -25,28 +25,13 @@ import {
 } from '@/components/ui/accordion'
 import { useRouter } from 'next/navigation'
 
-import { useAtom, useAtomValue } from 'jotai'
-import { menuAtom, organizationAtom } from '@/commons'
+import { useAtom } from 'jotai'
+import { menuAtom } from '@/commons'
 import { sections } from './constants'
 
 export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
   const router = useRouter()
-  const organization = useAtomValue(organizationAtom)
   const [menuKey, setMenuKey] = useAtom(menuAtom)
-
-  const menu = [...sections].map((section) => {
-    const newSection = { ...section }
-    newSection.items = organization
-      ? newSection.items.map((item) => {
-          const newItem = { ...item }
-          newItem.onClick = newItem.onClick.replace('{org}', organization)
-
-          return newItem
-        })
-      : newSection.items.filter((item) => !item.onClick.includes('{org}'))
-
-    return newSection
-  })
 
   const onMenuClick = (item: MenuItemType) => {
     setMenuKey(item.id)
@@ -76,7 +61,7 @@ export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
             collapsible
             defaultValue={[menuKey?.split('-')?.[0] || '']}
           >
-            {menu.map((section, index) => (
+            {sections.map((section, index) => (
               <AccordionItem key={index} value={section.value}>
                 <AccordionItemTrigger>{section.title}</AccordionItemTrigger>
                 <AccordionItemContent>

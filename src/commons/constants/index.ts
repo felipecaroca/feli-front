@@ -1,5 +1,4 @@
 export * from './waitinglineMenu'
-export * from './modules'
 export * from './attention'
 export * from './localStorage'
 export * from './app'

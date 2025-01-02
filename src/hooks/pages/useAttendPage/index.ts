@@ -1,13 +1,15 @@
 'use client'
 
-import { ModuleModel, WithOrganizationParam } from '@/commons'
-import { useModulesCRUD, useOrganizationParam } from '@/hooks'
+import { ModuleModel, organizationAtom, WithOrganizationParam } from '@/commons'
+import { useModulesCRUD } from '@/hooks'
+import { useAtomValue } from 'jotai'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-export const useAttendPage = (props: WithOrganizationParam) => {
+export const useAttendPage = () => {
   const [modules, setModules] = useState<ModuleModel[] | undefined>(undefined)
-  const {organization} = useOrganizationParam(props)
+  const currentOrganization = useAtomValue(organizationAtom)
+  const organizationId = currentOrganization?.id || ''
   const {getModules, getting} = useModulesCRUD()
   const router = useRouter()
 
@@ -16,16 +18,15 @@ export const useAttendPage = (props: WithOrganizationParam) => {
 
 
   useEffect(() => {
-    if(organization)
-      getModules(organization).then(modules => {
+    if(organizationId)
+      getModules(organizationId).then(modules => {
         if(modules.length > 0)
           setModules(modules)
         else router.replace('manage-attention')
       })
-  }, [organization])
+  }, [organizationId])
 
   return {
-    organization,
     modules, 
     getting,
     hasModules,

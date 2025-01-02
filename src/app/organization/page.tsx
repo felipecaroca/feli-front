@@ -1,6 +1,8 @@
 'use client'
 
+import { MAX_ORGANIZATIONS_ALLOWED } from '@/commons'
 import {
+  AddNewButtonComponent,
   ConfirmationDialogComponent,
   FullScreenCenterComponent,
   OrganizationCardComponent,
@@ -18,30 +20,38 @@ const OrganizationPage = () => {
     confirmIsOpen,
     forDelete,
     deleting,
+    currentOrganization,
     onDelete,
     onCancel,
     onDeleteOrganization,
     onEdit,
+    onNew,
   } = useOrganizationPage()
 
   return (
     <ProtectedRouteComponent>
       <FullScreenCenterComponent>
         <TitleComponent mb="10px">Mis Organizaciones</TitleComponent>
-        <Flex gap={4}>
+        <Flex gap={4} wrap="wrap" justify="center">
           {getting ? (
-            <SkeletonSquare noOfLines={3} w={200} h={200} />
+            <SkeletonSquare noOfLines={2} w={200} h={200} />
           ) : (
-            myOrganizations?.map((org) => (
-              <OrganizationCardComponent
-                key={org.id}
-                organization={org}
-                w="200px"
-                h="200px"
-                onCardClick={() => onEdit(org)}
-                onDelete={() => onDelete(org)}
-              />
-            ))
+            <>
+              {myOrganizations?.map((org) => (
+                <OrganizationCardComponent
+                  key={org.id}
+                  organization={org}
+                  w="200px"
+                  h="200px"
+                  onEdit={() => onEdit(org)}
+                  onDelete={() => onDelete(org)}
+                  isCurrent={currentOrganization?.id === org.id}
+                />
+              ))}
+              {(myOrganizations?.length || 0) < MAX_ORGANIZATIONS_ALLOWED && (
+                <AddNewButtonComponent w={200} h={200} onClick={onNew} />
+              )}
+            </>
           )}
         </Flex>
         <ConfirmationDialogComponent

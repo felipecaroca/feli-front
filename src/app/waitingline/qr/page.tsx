@@ -3,26 +3,14 @@
 import { Box, Text, chakra } from '@chakra-ui/react'
 import { FC, useEffect, useState } from 'react'
 import QRCode from 'react-qr-code'
-import { PageProps } from './types'
 import { useIsFullScreen, useQrCodePage } from '@/hooks'
 import { FullScreenCenterComponent } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 
-const QrCodePage: FC<PageProps> = (props) => {
-  const { qrValue: value } = useQrCodePage(props)
-  const [hidden, setHidden] = useState<boolean>(false)
-  const { isFullScreen } = useIsFullScreen()
-
-  useEffect(() => {
-    if (hidden) {
-      window?.print()
-      setHidden(false)
-    }
-  }, [hidden])
-
-  const showForManager = !hidden && !isFullScreen
+const QrCodePage: FC = () => {
+  const { qrValue: value, showForManager, hidden, setHidden } = useQrCodePage()
 
   return (
     <ProtectedRouteComponent {...{ hideUserSession: !showForManager }}>

@@ -3,34 +3,33 @@
 import {
   AttentionModel,
   AttentionStatusEnum,
-  WithModuleParam,
-  WithOrganizationParam,
+  organizationAtom,
 } from '@/commons'
-import { useAttentionsCRUD, useOrganizationParam, useSocket } from '@/hooks'
+import { useAttentionsCRUD, useSocket } from '@/hooks'
+import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 
-export const useAttentionViewPage = (
-  props: WithModuleParam & WithOrganizationParam
-) => {
-  const { organization } = useOrganizationParam(props)
+export const useAttentionViewPage = () => {
+  const currentOrganization = useAtomValue(organizationAtom)
+  const organizationId = currentOrganization?.id || ''
   const { getAttentions, getting } = useAttentionsCRUD()
   const [attentions, setAttentions] = useState<AttentionModel[]>([])
   const { socket } = useSocket()
 
   useEffect(() => {
-    if (organization)
-      getAttentions(organization).then((attentionsFound) =>
+    if (organizationId)
+      getAttentions(organizationId).then((attentionsFound) =>
         setAttentions(attentionsFound || [])
       )
-  }, [organization])
+  }, [organizationId])
 
   useEffect(() => {
-    if (socket && organization) {
-      socket.on(`${organization}-attentions`, (data: AttentionModel) => {
+    if (socket && organizationId) {
+      socket.on(`${organizationId}-attentions`, (data: AttentionModel) => {
         setAttentions((prev) => [...prev.filter((i) => i.id !== data.id), data])
       })
 
-      socket.on(`${organization}-attentions-reset`, (moduleId) => {
+      socket.on(`${organizationId}-attentions-reset`, (moduleId) => {
         console.log({ moduleId })
         setAttentions((prev) =>
           moduleId
@@ -39,7 +38,7 @@ export const useAttentionViewPage = (
         )
       })
     }
-  }, [socket, organization])
+  }, [socket, organizationId])
 
   return {
     waitting: attentions.filter(

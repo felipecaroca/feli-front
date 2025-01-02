@@ -1,17 +1,13 @@
 'use client'
 
-import {
-  AttentionModel,
-  WithModuleParam,
-  WithOrganizationParam,
-} from '@/commons'
-import { useOrganizationParam, useSocket, useManageAttention } from '@/hooks'
+import { AttentionModel, organizationAtom } from '@/commons'
+import { useSocket, useManageAttention } from '@/hooks'
+import { useAtomValue } from 'jotai'
 import { useEffect } from 'react'
 
-export const useManageAttentionPage = (
-  props: WithModuleParam & WithOrganizationParam
-) => {
-  const { organization } = useOrganizationParam(props)
+export const useManageAttentionPage = () => {
+  const currentOrganization = useAtomValue(organizationAtom)
+  const organizationId = currentOrganization?.id || ''
   const { socket } = useSocket()
 
   const {
@@ -31,14 +27,14 @@ export const useManageAttentionPage = (
     resetting,
     changing,
     calling,
-  } = useManageAttention({ organization })
+  } = useManageAttention({ organization: organizationId })
 
   useEffect(() => {
-    if (socket && organization)
-      socket.on(`${organization}-attentions`, (data: AttentionModel) => {
+    if (socket && organizationId)
+      socket.on(`${organizationId}-attentions`, (data: AttentionModel) => {
         setAttentions((prev) => [...prev.filter((i) => i.id !== data.id), data])
       })
-  }, [socket, organization])
+  }, [socket, organizationId])
 
   return {
     attentions,

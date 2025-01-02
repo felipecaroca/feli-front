@@ -29,9 +29,9 @@ const ModulesPage: FC<PageProps> = (props) => {
   return (
     <ProtectedRouteComponent>
       <FullScreenCenterComponent>
-        <Box mb={14}>
+        <Box mb={14} mt={['200px', 'unset']}>
           <TitleComponent>
-            Módulos de la organización {organization || ''}
+            Módulos de la organización {organization?.name || ''}
           </TitleComponent>
         </Box>
         <ModulesListComponent

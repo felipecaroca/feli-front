@@ -10,12 +10,11 @@ import {
 import { useManageAttentionPage } from '@/hooks'
 import { Box, Flex } from '@chakra-ui/react'
 import { FC } from 'react'
-import { PageProps } from './type'
 import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 
-const ManageAttentionPage: FC<PageProps> = (props) => {
+const ManageAttentionPage: FC = () => {
   const {
     currentAttention,
     attentions,
@@ -32,7 +31,8 @@ const ManageAttentionPage: FC<PageProps> = (props) => {
     resetting,
     changing,
     calling,
-  } = useManageAttentionPage(props)
+  } = useManageAttentionPage()
+
   return (
     <ProtectedRouteComponent>
       <FullScreenCenterComponent>

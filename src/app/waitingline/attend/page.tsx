@@ -7,12 +7,11 @@ import {
 } from '@/components'
 import { Box } from '@chakra-ui/react'
 import { FC } from 'react'
-import { PageProps } from './types'
 import { useAttendPage } from '@/hooks'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 
-const AttendPage: FC<PageProps> = (props) => {
-  const { modules, getting, hasModules, onCardClick } = useAttendPage(props)
+const AttendPage: FC = () => {
+  const { modules, getting, hasModules, onCardClick } = useAttendPage()
 
   return (
     <ProtectedRouteComponent>

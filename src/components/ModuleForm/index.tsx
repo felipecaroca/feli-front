@@ -10,6 +10,7 @@ export const ModuleFormComponent: FC<ComponentProps> = ({
   loading,
   defaultValues,
 }) => {
+  console.log(defaultValues)
   const { control, handleSubmit } = useModuleForm(defaultValues)
 
   return (

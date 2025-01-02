@@ -11,10 +11,8 @@ import { useAttentionViewPage } from '@/hooks'
 import { Box, Flex } from '@chakra-ui/react'
 import { FC } from 'react'
 
-const AttentionViewPage: FC<WithOrganizationParam & WithModuleParam> = (
-  props
-) => {
-  const { waitting, attending, getting } = useAttentionViewPage(props)
+const AttentionViewPage: FC = () => {
+  const { waitting, attending, getting } = useAttentionViewPage()
 
   return (
     <ProtectedRouteComponent hideUserSession>
@@ -22,13 +20,19 @@ const AttentionViewPage: FC<WithOrganizationParam & WithModuleParam> = (
         <Box mb={14}>
           <TitleComponent>Sala de espera</TitleComponent>
         </Box>
-        <Flex w="full" justify="space-between" alignItems="start" gap={2}>
-          <Box w="full">
+        <Flex
+          w="full"
+          justify="space-between"
+          alignItems="start"
+          gap={2}
+          wrap="wrap"
+        >
+          <Box w={['full', 'full', '48%']}>
             <TitleComponent mb="40px">Atendiendo</TitleComponent>
             <AttentionListComponent {...{ attentions: attending, getting }} />
           </Box>
-          <Box w="4px" bg="gray.300" h="full" borderRadius={6} />
-          <Box w="full" px="10px">
+          <Box w="2px" bg="gray.300" h={[0, 0, 'full']} borderRadius={6} />
+          <Box w={['full', 'full', '48%']} px="10px">
             <TitleComponent mb="40px">Próximas atenciones</TitleComponent>
             <AttentionListComponent {...{ attentions: waitting, getting }} />
           </Box>

@@ -1,6 +1,6 @@
 'use client'
 
-import { ModuleModel, WithOrganizationParam } from '@/commons'
+import { ModuleModel, WAITINGLINE_URL, WithOrganizationParam } from '@/commons'
 import { useModulesCRUD, useOrganizationParam } from '@/hooks'
 
 import { useRouter } from 'next/navigation'
@@ -19,7 +19,7 @@ export const useTakeAttentionCheckPage = (props: WithOrganizationParam) => {
     if (organization)
       getModules(organization).then((mods) => {
         if (mods.length > 0) setModules(mods)
-        else router.replace(`/${organization}/take-attention`)
+        else router.replace(`${WAITINGLINE_URL}/${organization}/take-attention`)
       })
   }, [organization])
 

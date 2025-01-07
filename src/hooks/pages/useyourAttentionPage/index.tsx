@@ -13,11 +13,13 @@ import {
 } from '@/hooks'
 import { useOrganizationParam } from '@/hooks/useOrganizationParam'
 import { useEffect, useState } from 'react'
+import { Socket } from 'socket.io-client'
 
 export const useYourAttentionPage = (
   props: WithOrganizationParam & WithAttentionParam
 ) => {
   const [attention, setAttention] = useState<AttentionModel | undefined>()
+  const [socket, setSocket] = useState<Socket | undefined>()
   const { organization } = useOrganizationParam(props)
   const { attentionId } = useAttentionIdParam(props)
   const [audioAccepted, setAudioAccepted] = useState<boolean>(false)
@@ -32,21 +34,37 @@ export const useYourAttentionPage = (
 
   useEffect(() => {
     if (organization && attentionId)
-      getAttention(organization, attentionId).then((myAttention) =>
+      getAttention(organization, attentionId).then((myAttention) => {
+        if (!myAttention) return
+        if (socket) socket.close()
+
         setAttention(myAttention)
-      )
+
+        const newSocket = connectSocket({ attentionId: myAttention.id })
+
+        newSocket.on('message', (attention: AttentionModel) => {
+          setAttention(attention)
+          notify(attention.status, audioAccepted)
+        })
+
+        setSocket(newSocket)
+      })
   }, [organization, attentionId])
 
   useEffect(() => {
-    if (attention) {
-      const socket = connectSocket({ attentionId: attention.id })
+    if (audioAccepted && attention) {
+      if (socket) socket.close()
 
-      socket.on('message', (attention: AttentionModel) => {
+      const newSocket = connectSocket({ attentionId: attention.id })
+
+      newSocket.on('message', (attention: AttentionModel) => {
         setAttention(attention)
         notify(attention.status, audioAccepted)
       })
+
+      setSocket(newSocket)
     }
-  }, [attention, audioAccepted])
+  }, [audioAccepted])
 
   return {
     attention,

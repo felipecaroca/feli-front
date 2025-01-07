@@ -25,11 +25,13 @@ export const useSocket = (lazy?: boolean) => {
 
   useEffect(() => {
     if (!lazy) connectSocket()
+  }, [])
 
+  useEffect(() => {
     return () => {
       socket?.close()
     }
-  }, [])
+  }, [socket])
 
   return { socket, connectSocket }
 }

@@ -1,6 +1,5 @@
 'use client'
 
-import { CreateOrganizationInput } from '@/commons'
 import {
   FullScreenCenterComponent,
   OrganizationFormComponent,
@@ -24,7 +23,7 @@ const EditOrganizationPage = () => {
             loading={updating}
             onSubmit={onUpdateOrganization}
             defaultValues={organization}
-            buttonText="Editar"
+            buttonText="Guardar cambios"
           />
         )}
       </FullScreenCenterComponent>

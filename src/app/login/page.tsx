@@ -4,7 +4,7 @@ import { FullScreenCenterComponent, TitleComponent } from '@/components'
 import { useSession } from '@/hooks'
 import { Box, Text } from '@chakra-ui/react'
 import { useGoogleOneTapLogin } from '@react-oauth/google'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { useEffect } from 'react'
 import styles from './styles.module.css'
@@ -13,11 +13,14 @@ import { WAITINGLINE_URL } from '@/commons'
 const LoginPage = () => {
   const { saveToken, logout } = useSession()
   const router = useRouter()
+  const searchParams = useSearchParams()
+
   useGoogleOneTapLogin({
     onSuccess: (credentialResponse) => {
       if (credentialResponse.credential) {
         saveToken(credentialResponse.credential)
-        router.replace(WAITINGLINE_URL)
+        const returnUrl = searchParams.get('returnUrl')
+        router.replace(returnUrl || WAITINGLINE_URL)
       }
     },
   })

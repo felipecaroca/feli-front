@@ -13,7 +13,9 @@ export const useSession = () => {
   const router = useRouter()
 
   const goToLogin = () => {
-    router.replace('/login')
+    if (location.pathname === '/login') return
+
+    router.replace(`/login?returnUrl=${location.pathname}`)
   }
 
   useEffect(() => {

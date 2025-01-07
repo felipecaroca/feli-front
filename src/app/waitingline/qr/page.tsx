@@ -1,9 +1,9 @@
 'use client'
 
 import { Box, Text, chakra } from '@chakra-ui/react'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import QRCode from 'react-qr-code'
-import { useIsFullScreen, useQrCodePage } from '@/hooks'
+import { useQrCodePage } from '@/hooks'
 import { FullScreenCenterComponent } from '@/components'
 import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'

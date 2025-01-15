@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import type { CollectionItem } from "@chakra-ui/react"
-import { Select as ChakraSelect, Portal } from "@chakra-ui/react"
-import { CloseButton } from "./close-button"
-import * as React from "react"
+import type { CollectionItem } from '@chakra-ui/react'
+import { Select as ChakraSelect, Portal, chakra } from '@chakra-ui/react'
+import { CloseButton } from './close-button'
+import * as React from 'react'
 
 interface SelectTriggerProps extends ChakraSelect.ControlProps {
   clearable?: boolean
@@ -75,7 +75,7 @@ export const SelectItem = React.forwardRef<
 })
 
 interface SelectValueTextProps
-  extends Omit<ChakraSelect.ValueTextProps, "children"> {
+  extends Omit<ChakraSelect.ValueTextProps, 'children'> {
   children?(items: CollectionItem[]): React.ReactNode
 }
 
@@ -93,7 +93,18 @@ export const SelectValueText = React.forwardRef<
           if (children) return children(items)
           if (items.length === 1)
             return select.collection.stringifyItem(items[0])
-          return `${items.length} selected`
+
+          return (items as { label: string }[]).map((a) => (
+            <chakra.span
+              key={a.label}
+              bg="gray.300"
+              p="2px 4px"
+              borderRadius="10px"
+              mr="4px"
+            >
+              {a.label}
+            </chakra.span>
+          ))
         }}
       </ChakraSelect.Context>
     </ChakraSelect.ValueText>

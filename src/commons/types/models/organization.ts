@@ -1,4 +1,5 @@
 import { BaseModel } from './base'
+import { ColaboratorInput } from './colaborator'
 
 export type CreateOrganizationInput = {
   name: string
@@ -6,7 +7,7 @@ export type CreateOrganizationInput = {
 
 export type UpdateOrganizationInput = {
   name?: string
-  userEmails?: string[]
+  colaborators?: ColaboratorInput[]
 }
 
 

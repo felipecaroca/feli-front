@@ -17,14 +17,14 @@ export const OrganizationHandlerComponent = () => {
     selectOrganization,
   } = useOrganizationHandler()
   return (
-    <Box p="10px">
+    <Box p="10px" mt={['50px', '50px', '10px']}>
       <Flex
         p="10px"
         gap="5px"
-        justify="start"
+        justify="space-between"
         align="center"
-        maxW={['70%', '90%', 'full']}
-        boxShadow="lg"
+        maxW="450px"
+        boxShadow="xs"
       >
         <Text>
           Organización seleccionada:{' '}

@@ -1,12 +1,12 @@
 'use client'
 
 import {
-  FullScreenCenterComponent,
   OrganizationFormComponent,
   ProtectedRouteComponent,
   TitleComponent,
 } from '@/components'
 import { useEditOrganizationPage } from '@/hooks'
+import { Box, Flex } from '@chakra-ui/react'
 
 const EditOrganizationPage = () => {
   const { organization, onUpdateOrganization, updating } =
@@ -14,19 +14,21 @@ const EditOrganizationPage = () => {
 
   return (
     <ProtectedRouteComponent>
-      <FullScreenCenterComponent>
-        <TitleComponent>
-          Editar organización {organization?.name}
-        </TitleComponent>
-        {organization && (
-          <OrganizationFormComponent
-            loading={updating}
-            onSubmit={onUpdateOrganization}
-            defaultValues={organization}
-            buttonText="Guardar cambios"
-          />
-        )}
-      </FullScreenCenterComponent>
+      <Flex justify="center">
+        <Box>
+          <TitleComponent>
+            Editar organización {organization?.name}
+          </TitleComponent>
+          {organization && (
+            <OrganizationFormComponent
+              loading={updating}
+              onSubmit={onUpdateOrganization}
+              defaultValues={organization}
+              buttonText="Guardar cambios"
+            />
+          )}
+        </Box>
+      </Flex>
     </ProtectedRouteComponent>
   )
 }

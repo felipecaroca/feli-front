@@ -18,13 +18,19 @@ export const ProtectedRouteComponent: FC<ComponentProps> = ({
       {user ? (
         <Box>
           {!hideUserSession && (
-            <Flex>
-              <OrganizationHandlerComponent />{' '}
+            <Box
+              bg="white"
+              w="full"
+              zIndex={99}
+              position="fixed"
+              top="0"
+              boxShadow="md"
+            >
               <MenuComponent {...{ user, logout }} />
-            </Flex>
+              <OrganizationHandlerComponent />
+            </Box>
           )}
-
-          {children}
+          <Box pt="200px">{children}</Box>
         </Box>
       ) : null}
     </>

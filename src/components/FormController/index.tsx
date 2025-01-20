@@ -2,7 +2,7 @@ import { Controller, FieldValues } from 'react-hook-form'
 import { ComponentProps } from './types'
 import { Field } from '../ui/field'
 
-export const FormControllerCompnent = <T extends FieldValues>({
+export const FormControllerComponent = <T extends FieldValues>({
   name,
   control,
   label,

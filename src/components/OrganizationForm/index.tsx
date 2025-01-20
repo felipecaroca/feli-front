@@ -1,60 +1,13 @@
-import {
-  Box,
-  createListCollection,
-  Flex,
-  Input,
-  ListCollection,
-} from '@chakra-ui/react'
-import { FormControllerCompnent } from '../FormController'
+import { Box, Flex, Input } from '@chakra-ui/react'
+import { FormControllerComponent } from '../FormController'
 import { Button } from '../ui/button'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { useOrganizationForm } from '@/hooks'
-import {
-  SelectContent,
-  SelectItem,
-  SelectRoot,
-  SelectTrigger,
-  SelectValueText,
-} from '../ui/select'
-import { PERMISSIONS_LIST } from '@/commons'
+import { APP_NAMES, APP_PERMISSIONS, MAX_COLABORATORS_ALLOWED } from '@/commons'
+import { Checkbox } from '../ui/checkbox'
+import { ErrorMessageComponent } from '../ErrorMessage'
 
-const permissionKeys = Object.keys(PERMISSIONS_LIST)
-
-const labels: Record<string, string> = {
-  ORGANIZATION: 'Organización',
-  WAITINGLINE: 'Atención clientes',
-}
-
-const apps = createListCollection({
-  items: permissionKeys.map((key) => ({
-    label: labels[key],
-    value: key,
-  })),
-})
-
-const orgPermissions = createListCollection({
-  items: PERMISSIONS_LIST.ORGANIZATION.map((permission) => ({
-    label: permission,
-    value: permission,
-  })),
-})
-
-const waitingPermissions = createListCollection({
-  items: PERMISSIONS_LIST.WAITINGLINE.map((permission) => ({
-    label: permission,
-    value: permission,
-  })),
-})
-
-const permissionItems: Record<string, ListCollection> = {
-  ORGANIZATION: orgPermissions,
-  WAITINGLINE: waitingPermissions,
-}
-
-const voidItems = createListCollection({
-  items: [],
-})
 // TODO: refactorizar para que quede ordenado
 export const OrganizationFormComponent: FC<ComponentProps> = ({
   loading,
@@ -62,8 +15,18 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
   buttonText,
   defaultValues,
 }) => {
-  const { handleSubmit, control, watch, fields, append, remove, setValue } =
-    useOrganizationForm(defaultValues)
+  const {
+    handleSubmit,
+    control,
+    fields,
+    append,
+    remove,
+    apps,
+    watch,
+    onCheckAllPermissions,
+    onCheckAppPermission,
+    errors,
+  } = useOrganizationForm(defaultValues)
 
   // TODO: cambiar estructura  de permissions a la usada en el back
 
@@ -78,7 +41,9 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box>
-        <FormControllerCompnent {...{ name: 'name', control, label: 'Nombre' }}>
+        <FormControllerComponent
+          {...{ name: 'name', control, label: 'Nombre' }}
+        >
           {({ field: { onBlur, onChange, value } }) => (
             <Input
               {...{
@@ -90,7 +55,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
               }}
             />
           )}
-        </FormControllerCompnent>
+        </FormControllerComponent>
       </Box>
       {fields.map((field, index) => (
         <Flex
@@ -105,11 +70,11 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
           borderBottomColor="gray.300"
         >
           <Box>
-            <FormControllerCompnent
+            <FormControllerComponent
               {...{
                 name: `colaborators.${index}.email`,
                 control,
-                label: 'Correo',
+                label: 'Correo del colaborador',
               }}
             >
               {({ field: { onBlur, onChange, value } }) => (
@@ -122,82 +87,64 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
                   }}
                 />
               )}
-            </FormControllerCompnent>
+            </FormControllerComponent>
           </Box>
-          <Box>
-            <FormControllerCompnent
-              {...{
-                name: `colaborators.${index}.app`,
-                control,
-                label: 'Aplicación',
-              }}
-            >
-              {({ field: { name, onBlur, onChange, value } }) => (
-                <SelectRoot
-                  collection={apps}
-                  width="320px"
-                  name={name}
-                  value={value ? [value.toString()] : undefined}
-                  onValueChange={({ value }) => {
-                    setValue(`colaborators.${index}.permissions`, [])
-                    onChange(value?.[0])
-                  }}
-                  onInteractOutside={() => onBlur()}
+          <Box
+            border={
+              errors?.colaborators?.[index]?.permissions ? '1px solid' : ''
+            }
+            borderColor="red.500"
+            borderRadius="4px"
+            p="10px"
+          >
+            {apps.map((app) => (
+              <Box key={app.id} mb="10px">
+                <Checkbox
+                  checked={
+                    watch(`colaborators.${index}.permissions`).find(
+                      (i) => i.app === app.name
+                    )?.permissions.length === app.permissions.length
+                  }
+                  onCheckedChange={({ checked }) =>
+                    onCheckAllPermissions(app, checked === true, index)
+                  }
                 >
-                  <SelectTrigger>
-                    <SelectValueText placeholder="Seleciona la aplicación" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {apps.items.map((app) => (
-                      <SelectItem item={app} key={app.value}>
-                        {app.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </SelectRoot>
-              )}
-            </FormControllerCompnent>
+                  Permisos para {APP_NAMES[app.name]}
+                </Checkbox>
+                <Box padding="4" borderWidth="1px">
+                  {app.permissions.map((permission) => (
+                    <Checkbox
+                      checked={
+                        watch(`colaborators.${index}.permissions`)
+                          .find((i) => i.app === app.name)
+                          ?.permissions?.some((i) => i === permission) || false
+                      }
+                      onCheckedChange={({ checked }) =>
+                        onCheckAppPermission(
+                          app,
+                          permission,
+                          checked === true,
+                          index
+                        )
+                      }
+                      key={permission}
+                      ml="20px"
+                    >
+                      {APP_PERMISSIONS[permission]}
+                    </Checkbox>
+                  ))}
+                </Box>
+              </Box>
+            ))}
+            <ErrorMessageComponent
+              message={
+                errors?.colaborators?.[index]?.permissions?.message ||
+                errors?.colaborators?.[index]?.permissions?.[0]?.permissions
+                  ?.message
+              }
+            />
           </Box>
-          <Box>
-            <FormControllerCompnent
-              {...{
-                name: `colaborators.${index}.permissions`,
-                control,
-                label: 'Permisos',
-              }}
-            >
-              {({ field: { name, onBlur, onChange, value } }) => {
-                const app = watch(`colaborators.${index}.app`)
-                const selectOptions = permissionItems[app] || voidItems
 
-                return (
-                  <SelectRoot
-                    multiple
-                    collection={selectOptions}
-                    width="320px"
-                    name={name}
-                    value={value ? (value as string[]) : undefined}
-                    onValueChange={({ value }) => {
-                      console.log(typeof value)
-                      onChange(value)
-                    }}
-                    onInteractOutside={() => onBlur()}
-                  >
-                    <SelectTrigger>
-                      <SelectValueText placeholder="Seleciona los permisos" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {selectOptions.items.map((app) => (
-                        <SelectItem item={app} key={app.value}>
-                          {app.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </SelectRoot>
-                )
-              }}
-            </FormControllerCompnent>
-          </Box>
           <Box pt="34px">
             <Button colorPalette="red" onClick={() => remove(index)}>
               Eliminar
@@ -206,14 +153,16 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
         </Flex>
       ))}
 
-      <Flex mb="10px" justify="center">
-        <Button
-          colorPalette="cyan"
-          onClick={() => append({ email: '', app: '', permissions: [] })}
-        >
-          Agregar Colaborador
-        </Button>
-      </Flex>
+      {fields.length < MAX_COLABORATORS_ALLOWED && (
+        <Flex mb="10px" justify="center">
+          <Button
+            colorPalette="cyan"
+            onClick={() => append({ email: '', permissions: [] })}
+          >
+            Agregar Colaborador
+          </Button>
+        </Flex>
+      )}
 
       <Button type="submit" w="full" loading={loading}>
         {buttonText || 'Crear'}

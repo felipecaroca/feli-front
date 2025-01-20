@@ -3,5 +3,9 @@ import { FC } from 'react'
 import { Props } from './types'
 
 export const ErrorMessageComponent: FC<Props> = ({ message }) => {
-  return message ? <Text color="red.600">{message}</Text> : null
+  return message ? (
+    <Text color="red.500" fontSize="12px">
+      {message}
+    </Text>
+  ) : null
 }

@@ -3,7 +3,7 @@ import { ComponentProps } from './types'
 import { Box, Input, Flex } from '@chakra-ui/react'
 import { useAttentionForm } from '@/hooks'
 import { Button } from '../ui/button'
-import { FormControllerCompnent } from '../FormController'
+import { FormControllerComponent } from '../FormController'
 
 export const AttentionFormComponent: FC<ComponentProps> = ({
   onSubmit,
@@ -15,7 +15,9 @@ export const AttentionFormComponent: FC<ComponentProps> = ({
   return (
     <Box w="full">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControllerCompnent {...{ name: 'name', control, label: 'Nombre' }}>
+        <FormControllerComponent
+          {...{ name: 'name', control, label: 'Nombre' }}
+        >
           {({ field: { onBlur, onChange, value } }) => (
             <Input
               {...{
@@ -26,7 +28,7 @@ export const AttentionFormComponent: FC<ComponentProps> = ({
               }}
             />
           )}
-        </FormControllerCompnent>
+        </FormControllerComponent>
 
         <Flex justify="end" py={2}>
           <Button type="submit" {...{ loading }}>

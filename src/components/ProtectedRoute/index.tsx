@@ -1,7 +1,7 @@
 'use client'
 
 import { useSession } from '@/hooks'
-import { Box, Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { MenuComponent } from '../Menu'

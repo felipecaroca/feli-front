@@ -1,5 +1,9 @@
+export type PermissionsInput = {
+  app: string, 
+  permissions: string[]
+}
+
 export type ColaboratorInput = {
   email: string
-  app: string
-  permissions: string[]
+  permissions: PermissionsInput[]
 }

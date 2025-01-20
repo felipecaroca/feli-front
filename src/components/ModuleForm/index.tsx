@@ -3,7 +3,7 @@ import { ComponentProps } from './types'
 import { Box, Textarea, Input, Flex } from '@chakra-ui/react'
 import { useModuleForm } from '@/hooks'
 import { Button } from '../ui/button'
-import { FormControllerCompnent } from '../FormController'
+import { FormControllerComponent } from '../FormController'
 
 export const ModuleFormComponent: FC<ComponentProps> = ({
   onSubmit,
@@ -16,7 +16,7 @@ export const ModuleFormComponent: FC<ComponentProps> = ({
   return (
     <Box w="full">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControllerCompnent
+        <FormControllerComponent
           {...{ name: 'name', control, label: 'Nombre del módulo' }}
         >
           {({ field: { onBlur, onChange, value } }) => (
@@ -29,9 +29,9 @@ export const ModuleFormComponent: FC<ComponentProps> = ({
               }}
             />
           )}
-        </FormControllerCompnent>
+        </FormControllerComponent>
 
-        <FormControllerCompnent
+        <FormControllerComponent
           {...{ name: 'prefix', label: 'Prefijo', control }}
         >
           {({ field: { onBlur, onChange, value } }) => (
@@ -44,9 +44,9 @@ export const ModuleFormComponent: FC<ComponentProps> = ({
               }}
             />
           )}
-        </FormControllerCompnent>
+        </FormControllerComponent>
 
-        <FormControllerCompnent
+        <FormControllerComponent
           {...{ name: 'description', label: 'Descripción', control }}
         >
           {({ field: { onChange, onBlur, value } }) => (
@@ -59,7 +59,7 @@ export const ModuleFormComponent: FC<ComponentProps> = ({
               }}
             />
           )}
-        </FormControllerCompnent>
+        </FormControllerComponent>
 
         <Flex justify="end" py={2}>
           <Button type="submit" {...{ loading }}>

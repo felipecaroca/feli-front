@@ -4,7 +4,11 @@ import { Button } from '../ui/button'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { useOrganizationForm } from '@/hooks'
-import { APP_NAMES, APP_PERMISSIONS, MAX_COLABORATORS_ALLOWED } from '@/commons'
+import {
+  APP_NAMES,
+  APP_PERMISSIONS,
+  MAX_COLLABORATORS_ALLOWED,
+} from '@/commons'
 import { Checkbox } from '../ui/checkbox'
 import { ErrorMessageComponent } from '../ErrorMessage'
 
@@ -30,7 +34,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
 
   // TODO: cambiar estructura  de permissions a la usada en el back
 
-  // export class ColaboratorInput {
+  // export class CollaboratorInput {
   //   email: string
   //   permissions: {
   //     app: string
@@ -72,7 +76,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
           <Box>
             <FormControllerComponent
               {...{
-                name: `colaborators.${index}.email`,
+                name: `collaborators.${index}.email`,
                 control,
                 label: 'Correo del colaborador',
               }}
@@ -91,7 +95,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
           </Box>
           <Box
             border={
-              errors?.colaborators?.[index]?.permissions ? '1px solid' : ''
+              errors?.collaborators?.[index]?.permissions ? '1px solid' : ''
             }
             borderColor="red.500"
             borderRadius="4px"
@@ -101,7 +105,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
               <Box key={app.id} mb="10px">
                 <Checkbox
                   checked={
-                    watch(`colaborators.${index}.permissions`).find(
+                    watch(`collaborators.${index}.permissions`).find(
                       (i) => i.app === app.name
                     )?.permissions.length === app.permissions.length
                   }
@@ -115,7 +119,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
                   {app.permissions.map((permission) => (
                     <Checkbox
                       checked={
-                        watch(`colaborators.${index}.permissions`)
+                        watch(`collaborators.${index}.permissions`)
                           .find((i) => i.app === app.name)
                           ?.permissions?.some((i) => i === permission) || false
                       }
@@ -138,8 +142,8 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
             ))}
             <ErrorMessageComponent
               message={
-                errors?.colaborators?.[index]?.permissions?.message ||
-                errors?.colaborators?.[index]?.permissions?.[0]?.permissions
+                errors?.collaborators?.[index]?.permissions?.message ||
+                errors?.collaborators?.[index]?.permissions?.[0]?.permissions
                   ?.message
               }
             />
@@ -153,7 +157,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
         </Flex>
       ))}
 
-      {fields.length < MAX_COLABORATORS_ALLOWED && (
+      {fields.length < MAX_COLLABORATORS_ALLOWED && (
         <Flex mb="10px" justify="center">
           <Button
             colorPalette="cyan"

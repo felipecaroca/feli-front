@@ -1,6 +1,6 @@
 export * from './useHomePage'
 export * from './useQrCodePage'
-export * from './useBusinessPage'
+export * from './useOrganizationIdPage'
 export * from './useModulesPage'
 export * from './useAttendPage'
 export * from './useManageModuleAttentionPage'

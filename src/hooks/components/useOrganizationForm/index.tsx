@@ -25,7 +25,7 @@ export const useOrganizationForm = (
 
   const { append, remove, fields } = useFieldArray({
     control,
-    name: 'colaborators',
+    name: 'collaborators',
   })
 
   const onCheckAllPermissions = (
@@ -33,7 +33,7 @@ export const useOrganizationForm = (
     checked: boolean,
     index: number
   ) => {
-    const oldPermissions = [...watch(`colaborators.${index}.permissions`)]
+    const oldPermissions = [...watch(`collaborators.${index}.permissions`)]
 
     let newPermissions = []
 
@@ -44,7 +44,7 @@ export const useOrganizationForm = (
       ]
     else newPermissions = oldPermissions.filter((item) => item.app !== app.name)
 
-    setValue(`colaborators.${index}.permissions`, newPermissions, {
+    setValue(`collaborators.${index}.permissions`, newPermissions, {
       shouldValidate: true,
     })
   }
@@ -55,7 +55,7 @@ export const useOrganizationForm = (
     checked: boolean,
     index: number
   ) => {
-    const oldPermissions = [...watch(`colaborators.${index}.permissions`)]
+    const oldPermissions = [...watch(`collaborators.${index}.permissions`)]
     const permissionIndex = oldPermissions.findIndex((i) => i.app === app.name)
 
     let newPermissions: PermissionsInput[] = []
@@ -86,7 +86,7 @@ export const useOrganizationForm = (
       }
     }
 
-    setValue(`colaborators.${index}.permissions`, newPermissions, {
+    setValue(`collaborators.${index}.permissions`, newPermissions, {
       shouldValidate: true,
     })
   }

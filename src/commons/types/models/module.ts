@@ -11,5 +11,5 @@ export type ModuleModel = {
   name: string
   prefix: string
   description: string
-  business: string
+  organizationId: string
 } & BaseModel

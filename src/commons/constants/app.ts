@@ -3,7 +3,7 @@ export const ORGANIZATION_URL = '/organization'
 
 export const MAX_MODULES_ALLOWED = 5
 export const MAX_ORGANIZATIONS_ALLOWED = 2
-export const MAX_COLABORATORS_ALLOWED = 3
+export const MAX_COLLABORATORS_ALLOWED = 3
 
 export const APP_NAMES: Record<string, string> = {
   ORGANIZATION: 'Organización',

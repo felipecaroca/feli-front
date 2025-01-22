@@ -3,7 +3,7 @@ export type PermissionsInput = {
   permissions: string[]
 }
 
-export type ColaboratorInput = {
+export type CollaboratorInput = {
   email: string
   permissions: PermissionsInput[]
 }

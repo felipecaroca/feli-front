@@ -3,23 +3,23 @@ import { Get, Post } from './api'
 
 const url = `${process.env.NEXT_PUBLIC_WAITING_LINE_BACK || ''}/attentions`
 
-export const getAttentionsService = async (business: string, moduleId?: string) => 
-  Get<AttentionModel[]>(`${url}/${business}${moduleId ? `/${moduleId}` : ''}`)
+export const getAttentionsService = async (organizationId: string, moduleId?: string) => 
+  Get<AttentionModel[]>(`${url}/${organizationId}${moduleId ? `/${moduleId}` : ''}`)
 
-export const createAttentionService = async (business: string, data: CreateAttentionInput) => 
-  Post<CreateAttentionInput, AttentionModel>(`${url}/${business}`, data)
+export const createAttentionService = async (organizationId: string, data: CreateAttentionInput) => 
+  Post<CreateAttentionInput, AttentionModel>(`${url}/${organizationId}`, data)
 
-export const resetAttentionService = async (business: string, moduleId?: string) =>
-  Post<unknown, boolean>(`${url}/reset/${business}${moduleId?`/${moduleId}`:''}`, {})
+export const resetAttentionService = async (organizationId: string, moduleId?: string) =>
+  Post<unknown, boolean>(`${url}/reset/${organizationId}${moduleId?`/${moduleId}`:''}`, {})
 
-export const changeAttentionStatusService = async (business: string, id: string, data: ChangeStatusAttentionInput) => 
-  Post<ChangeStatusAttentionInput, AttentionModel>(`${url}/status/${business}/${id}`, data)
+export const changeAttentionStatusService = async (organizationId: string, id: string, data: ChangeStatusAttentionInput) => 
+  Post<ChangeStatusAttentionInput, AttentionModel>(`${url}/status/${organizationId}/${id}`, data)
 
-export const callAttentionService = async (business: string, id: string) => 
-  Post<unknown, boolean>(`${url}/${business}/${id}/call`, {})
+export const callAttentionService = async (organizationId: string, id: string) => 
+  Post<unknown, boolean>(`${url}/${organizationId}/${id}/call`, {})
 
-export const getAttentionService = async (business: string, attentionId: string)  =>
-  Get<AttentionModel>(`${url}/${business}/attention/${attentionId}`)
+export const getAttentionService = async (organizationId: string, attentionId: string)  =>
+  Get<AttentionModel>(`${url}/${organizationId}/attention/${attentionId}`)
 
 
 

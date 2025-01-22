@@ -19,15 +19,15 @@ export const useAttentionsCRUD = () => {
   const { call: callCreate, loading: creating } = useLoading()
   const { call: callGetOne, loading: gettingOne } = useLoading()
 
-  const getAttentions = (business: string, moduleId?: string) =>
+  const getAttentions = (organizationId: string, moduleId?: string) =>
     callGet(
-      () => getAttentionsService(business, moduleId),
+      () => getAttentionsService(organizationId, moduleId),
       () => [] as AttentionModel[]
     )
 
-  const resetAttention = (business: string, moduleId?: string) =>
+  const resetAttention = (organizationId: string, moduleId?: string) =>
     callReset(
-      () => resetAttentionService(business, moduleId),
+      () => resetAttentionService(organizationId, moduleId),
       () => false
     )
 
@@ -37,7 +37,7 @@ export const useAttentionsCRUD = () => {
   ) =>
     callChange(
       () =>
-        changeAttentionStatusService(attention.business, attention.id, {
+        changeAttentionStatusService(attention.organizationId, attention.id, {
           status,
         }),
       () => undefined
@@ -45,19 +45,22 @@ export const useAttentionsCRUD = () => {
 
   const callAttention = (attention: AttentionModel) =>
     callCallAttention(
-      () => callAttentionService(attention.business, attention.id),
+      () => callAttentionService(attention.organizationId, attention.id),
       () => false
     )
 
-  const createAttention = (business: string, data: CreateAttentionInput) =>
+  const createAttention = (
+    organizationId: string,
+    data: CreateAttentionInput
+  ) =>
     callCreate(
-      () => createAttentionService(business, data),
+      () => createAttentionService(organizationId, data),
       () => undefined
     )
 
-  const getAttention = (business: string, attentionId: string) =>
+  const getAttention = (organizationId: string, attentionId: string) =>
     callGetOne(
-      () => getAttentionService(business, attentionId),
+      () => getAttentionService(organizationId, attentionId),
       () => undefined
     )
 

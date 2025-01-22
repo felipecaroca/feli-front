@@ -7,7 +7,7 @@ export const schema = z.object({
       invalid_type_error: '*El valor no es válido',
     })
     .min(1, '*El nombre es requerido'),
-  colaborators: z.array(
+  collaborators: z.array(
     z.object({
       email: z.string().min(1, '*El correo es requerido')
         .email('*El correo no es valido')

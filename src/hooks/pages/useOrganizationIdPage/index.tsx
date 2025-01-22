@@ -4,7 +4,7 @@ import { MenuItem, WithOrganizationParam } from '@/commons'
 import { useOrganizationParam } from '@/hooks'
 import { useRouter } from 'next/navigation'
 
-export const useBusinessPage = (props: WithOrganizationParam) => {
+export const useOrganizationIdPage = (props: WithOrganizationParam) => {
   const router = useRouter()
   const { organization } = useOrganizationParam(props)
 

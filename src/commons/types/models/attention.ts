@@ -14,7 +14,7 @@ export type ChangeStatusAttentionInput = {
 export type AttentionModel = {
   number: number
   name?: string
-  business: string
+  organizationId: string
 
   moduleId?: string
   module?: ModuleModel

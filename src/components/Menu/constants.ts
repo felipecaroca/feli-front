@@ -6,7 +6,7 @@ export const sections: MenuSectionType[] = [
     value: 'ORGANIZATION',
     title: 'Organización',
     items: [
-      { id: 'ORGANIZATION-NEW', name: 'Nueva Organización', onClick:`${ORGANIZATION_URL}/create`},
+   
       { id: 'ORGANIZATION-CREATE', name: 'Ver Organizaciones', onClick: ORGANIZATION_URL},
     ],
   },

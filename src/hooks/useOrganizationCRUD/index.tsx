@@ -8,11 +8,15 @@ import {
   UpdateOrganizationInput,
   updateOrganizationService,
   getOrganizationByIdService,
+  organizationAtom,
 } from '@/commons'
 import { useLoading } from '../useLoading'
 import { toaster } from '@/components/ui/toaster'
+import { useAtom } from 'jotai'
 
 export const useOrganizationCRUD = () => {
+  const [currentOrganization, setCurrentOrganization] =
+    useAtom(organizationAtom)
   const { call: callGet, loading: getting } = useLoading()
   const { call: callGetById, loading: gettingById } = useLoading()
   const { call: callCreate, loading: creating } = useLoading()
@@ -43,13 +47,27 @@ export const useOrganizationCRUD = () => {
 
   const updateOrganization = (id: string, input: UpdateOrganizationInput) =>
     callUpdate(
-      () => updateOrganizationService(id, input),
+      async () => {
+        const updated = await updateOrganizationService(id, input)
+
+        if (updated.id === currentOrganization?.id)
+          setCurrentOrganization(updated)
+
+        return updated
+      },
       () => undefined
     )
 
   const deleteOrganization = (id: string) =>
     callDelete(
-      () => deleteOrganizationService(id),
+      async () => {
+        const deleted = await deleteOrganizationService(id)
+
+        if (deleted.id === currentOrganization?.id)
+          setCurrentOrganization({} as OrganizationModel)
+
+        return deleted
+      },
       () => undefined
     )
 

@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/drawer'
 import { Button } from '../ui/button'
 
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Link as ChakraLink, Text } from '@chakra-ui/react'
 import { Avatar } from '@/components/ui/avatar'
 import {
   AccordionItem,
@@ -28,6 +28,7 @@ import { useRouter } from 'next/navigation'
 import { useAtom } from 'jotai'
 import { menuAtom } from '@/commons'
 import { sections } from './constants'
+import Link from 'next/link'
 
 export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
   const router = useRouter()
@@ -66,16 +67,19 @@ export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
                 <AccordionItemTrigger>{section.title}</AccordionItemTrigger>
                 <AccordionItemContent>
                   {section.items?.map((item) => (
-                    <Button
-                      variant={menuKey === item.id ? 'subtle' : 'ghost'}
+                    <ChakraLink
+                      asChild
+                      bg={menuKey === item.id ? 'gray.100' : ''}
                       w="full"
                       key={item.id}
-                      onClick={() => onMenuClick(item)}
+                      p="5px"
                     >
-                      <Text w="full" textAlign="left">
-                        {item?.name}
-                      </Text>
-                    </Button>
+                      <Link href={item.onClick}>
+                        <Text w="full" textAlign="left">
+                          {item?.name}
+                        </Text>
+                      </Link>
+                    </ChakraLink>
                   ))}
                 </AccordionItemContent>
               </AccordionItem>

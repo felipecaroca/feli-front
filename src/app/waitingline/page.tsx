@@ -1,6 +1,7 @@
 'use client'
 
 import { WAITINGLINE_MENU } from '@/commons'
+import NeedOrganizationComponent from '@/components/NeedOrganization'
 import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
 import { Button } from '@/components/ui/button'
 
@@ -14,25 +15,27 @@ export default function Home() {
 
   return (
     <ProtectedRouteComponent>
-      <Flex
-        wrap="wrap"
-        gap={4}
-        justify="center"
-        align="center"
-        mt={['200px', 'unset']}
-      >
-        {menu.map((item) => (
-          <Button
-            key={item.name}
-            variant="outline"
-            onClick={() => onClick(item)}
-            w="200px"
-            h="200px"
-          >
-            {item.name}
-          </Button>
-        ))}
-      </Flex>
+      <NeedOrganizationComponent>
+        <Flex
+          wrap="wrap"
+          gap={4}
+          justify="center"
+          align="center"
+          mt={['200px', 'unset']}
+        >
+          {menu.map((item) => (
+            <Button
+              key={item.name}
+              variant="outline"
+              onClick={() => onClick(item)}
+              w="200px"
+              h="200px"
+            >
+              {item.name}
+            </Button>
+          ))}
+        </Flex>
+      </NeedOrganizationComponent>
     </ProtectedRouteComponent>
   )
 }

@@ -34,6 +34,7 @@ export const useCreateOrganizationPage = () => {
     onSubmit,
     creating,
     onBack,
+    loading: getting && organizations === undefined,
     canCreateNew:
       !getting &&
       organizations !== undefined &&

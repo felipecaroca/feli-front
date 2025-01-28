@@ -1,14 +1,7 @@
-import { Heading, HeadingProps } from '@chakra-ui/react'
 import { FC } from 'react'
 import { WithChildren } from '@/commons'
+import style from './style.module.css'
 
-export const TitleComponent: FC<WithChildren & HeadingProps> = ({
-  children,
-  ...headingProps
-}) => {
-  return (
-    <Heading size="2xl" textAlign="center" {...headingProps}>
-      {children}
-    </Heading>
-  )
+export const TitleComponent: FC<WithChildren> = ({ children }) => {
+  return <div className={style.title}>{children}</div>
 }

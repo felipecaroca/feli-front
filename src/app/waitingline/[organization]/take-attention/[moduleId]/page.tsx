@@ -8,6 +8,7 @@ import {
 } from '@/components'
 
 import { useTakeAttentionPage } from '@/hooks'
+import { Box } from '@chakra-ui/react'
 
 import { FC } from 'react'
 
@@ -18,9 +19,9 @@ const TakeAttetionWithModulePage: FC<
 
   return (
     <FullScreenCenterComponent>
-      <TitleComponent mb={14}>
-        Agrega tu nombre para tomar tu atención
-      </TitleComponent>
+      <Box mb={14}>
+        <TitleComponent>Agrega tu nombre para tomar tu atención</TitleComponent>
+      </Box>
 
       <AttentionFormComponent {...{ onSubmit, loading }} />
     </FullScreenCenterComponent>

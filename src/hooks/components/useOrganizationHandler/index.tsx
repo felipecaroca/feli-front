@@ -1,3 +1,5 @@
+'use client'
+
 import { organizationAtom, OrganizationModel } from '@/commons'
 import { useOrganizationCRUD } from '@/hooks'
 import { useDisclosure } from '@chakra-ui/react'

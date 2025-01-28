@@ -37,7 +37,9 @@ export const OrganizationHandlerComponent = () => {
         </Button>
       </Flex>
       <ModalComponent {...{ open, onClose }}>
-        <TitleComponent mb="50px">Selecciona una Organización</TitleComponent>
+        <Box mb="50px">
+          <TitleComponent>Selecciona una Organización</TitleComponent>
+        </Box>
         <Flex gap={4} wrap="wrap" justify="center">
           {loading ? (
             <SkeletonSquare noOfLines={3} w={200} h={200} />

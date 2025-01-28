@@ -10,7 +10,7 @@ import {
 } from '@/components'
 import { SkeletonSquare } from '@/components/ui/skeleton'
 import { useOrganizationPage } from '@/hooks'
-import { Flex, Text, chakra } from '@chakra-ui/react'
+import { Box, Flex, Text, chakra } from '@chakra-ui/react'
 
 const OrganizationPage = () => {
   const {
@@ -29,7 +29,9 @@ const OrganizationPage = () => {
 
   return (
     <ProtectedRouteComponent>
-      <TitleComponent mb="10px">Mis Organizaciones</TitleComponent>
+      <Box mb="10px">
+        <TitleComponent>Mis Organizaciones</TitleComponent>
+      </Box>
       <Flex gap={4} wrap="wrap" justify="center">
         {getting ? (
           <SkeletonSquare noOfLines={2} w={200} h={200} />

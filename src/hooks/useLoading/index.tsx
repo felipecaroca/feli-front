@@ -18,6 +18,7 @@ export const useLoading = () => {
     } catch (err) {
       console.error(
         'ERROR_MESSAGE',
+        err,
         (err as AxiosError<{ message: string }>).response?.data?.message
       )
       return errFunc(err as AxiosError<{ message: string }>)

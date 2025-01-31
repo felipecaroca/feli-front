@@ -1,0 +1,36 @@
+@keyframes arrowAnimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.8;
+    background-color: transparent;
+    filter: drop-shadow(0px 0px 50px yellow);
+  }
+}
+
+.arrow {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: arrowAnimation;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate-reverse;
+}
+
+.body {
+  background-color: red;
+  height: 30px;
+  width: 160px;
+  clip-path: polygon(20px 0, 100% 20%, 100% 80%, 0 100%);
+}
+
+.head {
+  background-color: red;
+  height: 50px;
+  width: 50px;
+  clip-path: polygon(0% 0%, 100% 50%, 100% 50%, 0% 100%);
+}

@@ -8,12 +8,22 @@ const CardMarkComponent: FC<ComponentProps> = ({
   top,
   left,
   width,
+  height,
   variant,
 }) => {
+  const wNum = parseInt(width)
+  const hNum = parseInt(height)
+
   return (
     <div
       className={`${styles.mark} ${styles[variant || 'default']}`}
-      style={{ top, left, width }}
+      style={{
+        top,
+        left,
+        width,
+        height,
+        clipPath: `polygon(${hNum}px 0, ${wNum - hNum}px 0, 100% 100%, 0 100%)`,
+      }}
     >
       {text}
     </div>

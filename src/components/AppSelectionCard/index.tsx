@@ -18,7 +18,8 @@ export const AppSelectionCardComponent: FC<ComponentProps> = ({
       {isSelected && (
         <CardMarkComponent
           text="En carro"
-          width="100px"
+          width="110px"
+          height="28px"
           left="75%"
           top="38px"
           variant="success"

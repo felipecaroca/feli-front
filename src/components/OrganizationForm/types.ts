@@ -1,4 +1,4 @@
-import { UpdateOrganizationInput } from "@/commons"
+import { UpdateOrganizationInput } from '@/commons'
 
 export type ComponentProps = {
   loading: boolean

@@ -1,5 +1,5 @@
-import { ORGANIZATION_URL, WAITINGLINE_URL } from "@/commons";
-import { MenuSectionType } from "./types";
+import { ORGANIZATION_URL, WAITINGLINE_URL } from '@/commons'
+import { MenuSectionType } from './types'
 
 export const sections: MenuSectionType[] = [
   {

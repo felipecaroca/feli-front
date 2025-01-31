@@ -11,6 +11,7 @@ export const usePlansPage = () => {
   const { getApps, gettingAll } = useAppsCRUD()
 
   const onSeeMore = (app: AppModel) => setSeeMore(app)
+
   const onSelect = (app: AppModel) => {
     if (selectedApps.some((item) => item.id === app.id))
       setSelectedApps(selectedApps.filter((item) => item.id !== app.id))
@@ -28,5 +29,6 @@ export const usePlansPage = () => {
     loading: gettingAll || apps === undefined,
     onSeeMore,
     onSelect,
+    selectedApps,
   }
 }

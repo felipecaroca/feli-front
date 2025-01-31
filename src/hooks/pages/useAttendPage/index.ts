@@ -1,6 +1,6 @@
 'use client'
 
-import { ModuleModel, organizationAtom, WithOrganizationParam } from '@/commons'
+import { ModuleModel, organizationAtom } from '@/commons'
 import { useModulesCRUD } from '@/hooks'
 import { useAtomValue } from 'jotai'
 import { useRouter } from 'next/navigation'

@@ -2,28 +2,33 @@
 
 import {
   AppSelectionCardComponent,
-  CardListComponent,
+  FlexComponent,
   TitleComponent,
 } from '@/components'
 import { SkeletonSquare } from '@/components/ui/skeleton'
 import { usePlansPage } from '@/hooks'
 
 const PlansPage = () => {
-  const { apps, loading, onSeeMore, onSelect } = usePlansPage()
+  const { apps, loading, onSeeMore, onSelect, selectedApps } = usePlansPage()
 
   return loading ? (
     <SkeletonSquare noOfLines={3} />
   ) : (
     <div>
       <TitleComponent>Personaliza tu plan</TitleComponent>
-      <CardListComponent>
+      <FlexComponent>
         {apps?.map((app) => (
           <AppSelectionCardComponent
             key={app.id}
-            {...{ app, onSeeMore, onSelect }}
+            {...{
+              app,
+              onSeeMore,
+              onSelect,
+              isSelected: selectedApps.some((i) => i.id === app.id),
+            }}
           />
         ))}
-      </CardListComponent>
+      </FlexComponent>
     </div>
   )
 }

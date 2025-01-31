@@ -1,0 +1,45 @@
+.button {
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 4px 10px;
+  opacity: 0.9;
+  width: 100%;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.button:active {
+  opacity: 0.8;
+}
+
+.default {
+  border: 1px solid #6c757d;
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.danger {
+  border: 1px solid #dc3545;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.success {
+  border: 1px solid #198754;
+  background-color: #198754;
+  color: #fff;
+}
+.info {
+  border: 1px solid #0d6efd;
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.warning {
+  border: 1px solid #ffc107;
+  background-color: #ffc107;
+  color: #000;
+}

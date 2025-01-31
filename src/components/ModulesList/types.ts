@@ -1,5 +1,5 @@
-import { ModuleModel } from '@/commons'
-import { ClickOrModify } from '@/commons/types/components/card'
+import { ModuleModel, ClickOrModify } from '@/commons'
+
 
 export type ComponentProps = {
   loading: boolean

@@ -1,8 +1,8 @@
-import { atom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
-import { User } from "../types";
-import { getFromLocalStorage } from "../utils";
-import { LOCAL_STORAGE_KEYS } from "../constants";
+import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
+import { User } from '../types'
+import { getFromLocalStorage } from '../utils'
+import { LOCAL_STORAGE_KEYS } from '../constants'
 
 
 

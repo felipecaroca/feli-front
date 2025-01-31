@@ -1,4 +1,4 @@
-import { User } from "@/commons"
+import { User } from '@/commons'
 
 export type ComponentProps = {
   user?: User

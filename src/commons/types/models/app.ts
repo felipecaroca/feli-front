@@ -1,4 +1,4 @@
-import { BaseModel } from "./base";
+import { BaseModel } from './base'
 
 export type FeatureModel = {
   title?: string

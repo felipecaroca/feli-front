@@ -1,5 +1,5 @@
-import { AppModel } from "./app"
-import { BaseModel } from "./base"
+import { AppModel } from './app'
+import { BaseModel } from './base'
 
 export type User = {
   name: string

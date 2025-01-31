@@ -1,5 +1,5 @@
-import { User } from "../types";
-import { Get } from "./api";
+import { User } from '../types'
+import { Get } from './api'
 
 const url = `${process.env.NEXT_PUBLIC_WAITING_LINE_BACK || ''}/me`
 

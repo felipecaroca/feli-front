@@ -1,4 +1,4 @@
-import { WithChildren } from "@/commons"
+import { WithChildren } from '@/commons'
 
 export type ComponentProps = {
   hideUserSession?: boolean

@@ -6,6 +6,7 @@ import { ButtonComponent } from '../Button'
 import { FlexComponent } from '../Flex'
 import CardMarkComponent from '../CardMark'
 import { BoxComponent } from '../Box'
+import { TextComponent } from '../Text'
 
 export const AppSelectionCardComponent: FC<ComponentProps> = ({
   app,
@@ -34,7 +35,11 @@ export const AppSelectionCardComponent: FC<ComponentProps> = ({
           src={app.img || ''}
         />
         <div className={style.padding}>
-          <div>{app.name}</div>
+          <TextComponent>{app.name}</TextComponent>
+
+          <TextComponent textAlign="end">
+            Precio: ${app.price.toLocaleString('es-CL')}
+          </TextComponent>
           <FlexComponent justify="end" padding="20px 0 0">
             <BoxComponent>
               <ButtonComponent onClick={() => onSeeMore(app)} variant="danger">

@@ -8,6 +8,7 @@ export type FeatureModel = {
 export type AppModel = {
   name: string
   img?: string
+  price: number
   permissions: string[]
   features?: FeatureModel[]
 } & BaseModel

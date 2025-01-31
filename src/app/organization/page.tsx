@@ -10,9 +10,10 @@ import {
   ProtectedRouteComponent,
   SkeletonComponent,
   SpanComponent,
+  TextComponent,
   TitleComponent,
 } from '@/components'
-import { TextComponent } from '@/components/Text'
+
 import { useOrganizationPage } from '@/hooks'
 
 const OrganizationPage = () => {

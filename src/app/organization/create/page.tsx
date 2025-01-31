@@ -1,16 +1,16 @@
 'use client'
 
 import {
+  BoxComponent,
+  ButtonComponent,
+  FlexComponent,
   OrganizationFormComponent,
   ProtectedRouteComponent,
   SkeletonComponent,
   TitleComponent,
 } from '@/components'
 
-import { Button } from '@/components/ui/button'
-
 import { useCreateOrganizationPage } from '@/hooks'
-import { Box, Flex } from '@chakra-ui/react'
 
 const CreateOrganizationPage = () => {
   const { onSubmit, creating, canCreateNew, onBack, loading } =
@@ -18,28 +18,23 @@ const CreateOrganizationPage = () => {
 
   return (
     <ProtectedRouteComponent>
-      <Flex justify="center" px="20px">
+      <FlexComponent justify="center" padding="0 20px">
         {loading ? (
           <SkeletonComponent width="300px" height="300px" noOfLines={1} />
         ) : canCreateNew ? (
-          <Box>
+          <BoxComponent>
             <TitleComponent>Crear nueva organización</TitleComponent>
             <OrganizationFormComponent {...{ loading: creating, onSubmit }} />
-          </Box>
+          </BoxComponent>
         ) : (
-          <Box>
+          <BoxComponent>
             <TitleComponent>No puedes crear mas organizaciones</TitleComponent>
-            <Button
-              onClick={onBack}
-              colorPalette="blue"
-              variant="outline"
-              mt="40px"
-            >
-              Volver
-            </Button>
-          </Box>
+            <BoxComponent padding="40px 0 0 0">
+              <ButtonComponent onClick={onBack}>Volver</ButtonComponent>
+            </BoxComponent>
+          </BoxComponent>
         )}
-      </Flex>
+      </FlexComponent>
     </ProtectedRouteComponent>
   )
 }

@@ -11,6 +11,7 @@ import {
 } from '@/commons'
 import { Checkbox } from '../ui/checkbox'
 import { ErrorMessageComponent } from '../ErrorMessage'
+import { BoxComponent } from '../Box'
 
 // TODO: refactorizar para que quede ordenado
 export const OrganizationFormComponent: FC<ComponentProps> = ({
@@ -32,19 +33,9 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
     errors,
   } = useOrganizationForm(defaultValues)
 
-  // TODO: cambiar estructura  de permissions a la usada en el back
-
-  // export class CollaboratorInput {
-  //   email: string
-  //   permissions: {
-  //     app: string
-  //     permissions: string[]
-  //   }[]
-  // }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box>
+      <BoxComponent>
         <FormControllerComponent
           {...{ name: 'name', control, label: 'Nombre' }}
         >
@@ -60,7 +51,7 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
             />
           )}
         </FormControllerComponent>
-      </Box>
+      </BoxComponent>
       {fields.map((field, index) => (
         <Flex
           key={field.id}

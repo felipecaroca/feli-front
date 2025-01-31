@@ -1,8 +1,7 @@
 'use client'
 
-import { FlexComponent } from '@/components'
-import BoxComponent from '@/components/Box'
-import { ButtonComponent } from '@/components/Button'
+import { BoxComponent, ButtonComponent, FlexComponent } from '@/components'
+
 import { useRouter } from 'next/navigation'
 
 const LandingPage = () => {

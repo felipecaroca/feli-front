@@ -1,12 +1,13 @@
 'use client'
 
 import {
+  BoxComponent,
+  FlexComponent,
   OrganizationFormComponent,
   ProtectedRouteComponent,
   TitleComponent,
 } from '@/components'
 import { useEditOrganizationPage } from '@/hooks'
-import { Box, Flex } from '@chakra-ui/react'
 
 const EditOrganizationPage = () => {
   const { organization, onUpdateOrganization, updating } =
@@ -14,8 +15,8 @@ const EditOrganizationPage = () => {
 
   return (
     <ProtectedRouteComponent>
-      <Flex justify="center">
-        <Box>
+      <FlexComponent justify="center">
+        <BoxComponent>
           <TitleComponent>
             Editar organización {organization?.name}
           </TitleComponent>
@@ -27,8 +28,8 @@ const EditOrganizationPage = () => {
               buttonText="Guardar cambios"
             />
           )}
-        </Box>
-      </Flex>
+        </BoxComponent>
+      </FlexComponent>
     </ProtectedRouteComponent>
   )
 }

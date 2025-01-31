@@ -3,10 +3,11 @@
 import {
   OrganizationFormComponent,
   ProtectedRouteComponent,
+  SkeletonComponent,
   TitleComponent,
 } from '@/components'
+
 import { Button } from '@/components/ui/button'
-import { SkeletonSquare } from '@/components/ui/skeleton'
 
 import { useCreateOrganizationPage } from '@/hooks'
 import { Box, Flex } from '@chakra-ui/react'
@@ -19,7 +20,7 @@ const CreateOrganizationPage = () => {
     <ProtectedRouteComponent>
       <Flex justify="center" px="20px">
         {loading ? (
-          <SkeletonSquare w="300px" h="300px" noOfLines={1} />
+          <SkeletonComponent width="300px" height="300px" noOfLines={1} />
         ) : canCreateNew ? (
           <Box>
             <TitleComponent>Crear nueva organización</TitleComponent>

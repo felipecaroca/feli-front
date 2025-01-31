@@ -3,16 +3,17 @@
 import {
   AppSelectionCardComponent,
   FlexComponent,
+  SkeletonComponent,
   TitleComponent,
 } from '@/components'
-import { SkeletonSquare } from '@/components/ui/skeleton'
+
 import { usePlansPage } from '@/hooks'
 
 const PlansPage = () => {
   const { apps, loading, onSeeMore, onSelect, selectedApps } = usePlansPage()
 
   return loading ? (
-    <SkeletonSquare noOfLines={3} />
+    <SkeletonComponent width="300px" height="500px" noOfLines={3} />
   ) : (
     <div>
       <TitleComponent>Personaliza tu plan</TitleComponent>

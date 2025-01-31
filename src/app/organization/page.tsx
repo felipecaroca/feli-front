@@ -3,14 +3,17 @@
 import { MAX_ORGANIZATIONS_ALLOWED } from '@/commons'
 import {
   AddNewButtonComponent,
+  BoxComponent,
   ConfirmationDialogComponent,
+  FlexComponent,
   OrganizationCardComponent,
   ProtectedRouteComponent,
+  SkeletonComponent,
+  SpanComponent,
   TitleComponent,
 } from '@/components'
-import { SkeletonSquare } from '@/components/ui/skeleton'
+import { TextComponent } from '@/components/Text'
 import { useOrganizationPage } from '@/hooks'
-import { Box, Flex, Text, chakra } from '@chakra-ui/react'
 
 const OrganizationPage = () => {
   const {
@@ -29,12 +32,12 @@ const OrganizationPage = () => {
 
   return (
     <ProtectedRouteComponent>
-      <Box mb="10px">
+      <BoxComponent padding="0 0 20px 0">
         <TitleComponent>Mis Organizaciones</TitleComponent>
-      </Box>
-      <Flex gap={4} wrap="wrap" justify="center">
+      </BoxComponent>
+      <FlexComponent justify="center">
         {getting ? (
-          <SkeletonSquare noOfLines={2} w={200} h={200} />
+          <SkeletonComponent noOfLines={2} width="200px" height="200px" />
         ) : (
           <>
             {myOrganizations?.map((org) => (
@@ -49,11 +52,15 @@ const OrganizationPage = () => {
               />
             ))}
             {(myOrganizations?.length || 0) < MAX_ORGANIZATIONS_ALLOWED && (
-              <AddNewButtonComponent w={200} h={200} onClick={onNew} />
+              <AddNewButtonComponent
+                width="200px"
+                height="200px"
+                onClick={onNew}
+              />
             )}
           </>
         )}
-      </Flex>
+      </FlexComponent>
       <ConfirmationDialogComponent
         onCancel={onCancel}
         onConfirm={onDeleteOrganization}
@@ -61,14 +68,14 @@ const OrganizationPage = () => {
         onClose={onCancel}
         loading={deleting}
       >
-        <Text>
+        <TextComponent>
           La organización{' '}
-          <chakra.span fontWeight={600}>{forDelete?.name}</chakra.span> se
-          eliminará de forma permanete,{' '}
-          <chakra.span fontWeight={600}>
+          <SpanComponent fontWeight={600}>{forDelete?.name}</SpanComponent> se
+          eliminará de forma permanente.{' '}
+          <TextComponent fontWeight={600}>
             ¿Realmente deseas eliminar?
-          </chakra.span>
-        </Text>
+          </TextComponent>
+        </TextComponent>
       </ConfirmationDialogComponent>
     </ProtectedRouteComponent>
   )

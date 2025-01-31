@@ -4,8 +4,8 @@ import style from './style.module.css'
 import Image from 'next/image'
 import { ButtonComponent } from '../Button'
 import { FlexComponent } from '../Flex'
-import BoxComponent from '../Box'
 import CardMarkComponent from '../CardMark'
+import { BoxComponent } from '../Box'
 
 export const AppSelectionCardComponent: FC<ComponentProps> = ({
   app,

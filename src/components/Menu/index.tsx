@@ -23,26 +23,21 @@ import {
   AccordionItemTrigger,
   AccordionRoot,
 } from '@/components/ui/accordion'
-import { useRouter } from 'next/navigation'
 
 import { useAtom } from 'jotai'
 import { menuAtom } from '@/commons'
 import { sections } from './constants'
 import Link from 'next/link'
+import { OrganizationHandlerComponent } from '../OrganizationHandler'
 
 export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
-  const router = useRouter()
   const [menuKey, setMenuKey] = useAtom(menuAtom)
-
-  const onMenuClick = (item: MenuItemType) => {
-    setMenuKey(item.id)
-    router.push(item.onClick)
-  }
+  const onMenuClick = (item: MenuItemType) => setMenuKey(item.id)
 
   return (
     <DrawerRoot>
       <DrawerBackdrop />
-      <DrawerTrigger asChild position="fixed" right={0}>
+      <DrawerTrigger asChild>
         <Button variant="outline" size="sm" m={4}>
           Menu
         </Button>
@@ -56,6 +51,7 @@ export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
               <Text>{user?.email}</Text>
             </Box>
           </Flex>
+          <OrganizationHandlerComponent />
         </DrawerHeader>
         <DrawerBody>
           <AccordionRoot
@@ -74,7 +70,10 @@ export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
                       key={item.id}
                       p="5px"
                     >
-                      <Link href={item.onClick}>
+                      <Link
+                        href={item.onClick}
+                        onClick={() => onMenuClick(item)}
+                      >
                         <Text w="full" textAlign="left">
                           {item?.name}
                         </Text>

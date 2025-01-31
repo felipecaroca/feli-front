@@ -3,10 +3,11 @@
 import { WithAttentionParam, WithOrganizationParam } from '@/commons'
 import {
   AcceptAudioButtonComponent,
+  AttentionTicketComponent,
   FullScreenCenterComponent,
+  SkeletonComponent,
 } from '@/components'
-import { AttentionTicketComponent } from '@/components/AttentionTicket'
-import { SkeletonSquare } from '@/components/ui/skeleton'
+
 import { useYourAttentionPage } from '@/hooks'
 import { FC } from 'react'
 
@@ -19,7 +20,7 @@ const YourAttetionPage: FC<WithOrganizationParam & WithAttentionParam> = (
   return (
     <FullScreenCenterComponent>
       {loading ? (
-        <SkeletonSquare noOfLines={2} w={200} h={200} />
+        <SkeletonComponent noOfLines={2} width="200px" height="200px" />
       ) : (
         <>
           <AttentionTicketComponent {...{ attention }} />

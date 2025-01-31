@@ -2,7 +2,8 @@ import { Box, Flex } from '@chakra-ui/react'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { renderAttentionName, renderAttentionNumber } from '@/commons'
-import { SkeletonSquare } from '../ui/skeleton'
+import { SkeletonComponent } from '../Skeleton'
+import { BoxComponent } from '../Box'
 
 export const AttentionListComponent: FC<ComponentProps> = ({
   attentions,
@@ -11,7 +12,9 @@ export const AttentionListComponent: FC<ComponentProps> = ({
   return (
     <Box>
       {getting ? (
-        <SkeletonSquare noOfLines={3} w="full" h={10} my={2} />
+        <BoxComponent padding="10px 0">
+          <SkeletonComponent noOfLines={3} width="100%" height="10px" />
+        </BoxComponent>
       ) : (
         attentions.map((attention) => (
           <Flex

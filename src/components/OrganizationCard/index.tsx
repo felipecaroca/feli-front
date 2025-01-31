@@ -1,7 +1,13 @@
-import { Box, Card, IconButton } from '@chakra-ui/react'
 import { FC } from 'react'
 import { ComponentProps } from './type'
 import { MdDelete, MdEdit } from 'react-icons/md'
+import CardMarkComponent from '../CardMark'
+import { ButtonComponent } from '../Button'
+import { BoxComponent } from '../Box'
+import { CardComponent } from '../Card'
+import { TitleComponent } from '../Title'
+import { FlexComponent } from '../Flex'
+import { FooterComponent } from '../Footer'
 
 export const OrganizationCardComponent: FC<ComponentProps> = ({
   organization,
@@ -9,59 +15,48 @@ export const OrganizationCardComponent: FC<ComponentProps> = ({
   onDelete,
   onEdit,
   isCurrent,
-  ...cardProps
 }) => {
   return (
-    <Card.Root
-      variant="elevated"
-      maxW={200}
-      flexWrap="wrap"
-      cursor={onCardClick ? 'pointer' : 'default'}
-      {...cardProps}
-      onClick={() => onCardClick && onCardClick(organization)}
-    >
-      <Card.Body>
+    <>
+      <CardComponent
+        width="200px"
+        height="200px"
+        onCardClick={onCardClick ? () => onCardClick(organization) : undefined}
+      >
         {isCurrent && (
-          <Box
-            color="white"
-            bg="blue.400"
-            textAlign="center"
-            position="relative"
-            w="90px"
-            top="-20px"
-            left="75%"
-            transform="rotate(45deg)"
-            clipPath="polygon(25% 0, 75% 0, 100% 100%, 0 100%)"
-          >
-            Actual
-          </Box>
+          <CardMarkComponent
+            width="90px"
+            height="26px"
+            left="70%"
+            variant="warning"
+            top="0px"
+            text="Actual"
+          />
         )}
-        <Card.Title>{organization.name}</Card.Title>
-      </Card.Body>
-      {(onDelete || onEdit) && (
-        <Card.Footer justifyContent="end">
-          {onEdit && (
-            <IconButton
-              size="sm"
-              colorPalette="blue"
-              variant="outline"
-              onClick={onEdit}
-            >
-              <MdEdit />
-            </IconButton>
-          )}
-          {onDelete && (
-            <IconButton
-              size="sm"
-              colorPalette="red"
-              variant="outline"
-              onClick={onDelete}
-            >
-              <MdDelete />
-            </IconButton>
-          )}
-        </Card.Footer>
-      )}
-    </Card.Root>
+        <BoxComponent padding="20px" height="100%">
+          <TitleComponent textAlign="start">{organization.name}</TitleComponent>
+          <FooterComponent bottom={isCurrent ? '60px' : '34px'}>
+            {(onDelete || onEdit) && (
+              <FlexComponent justify="end">
+                {onEdit && (
+                  <BoxComponent>
+                    <ButtonComponent onClick={onEdit}>
+                      <MdEdit />
+                    </ButtonComponent>
+                  </BoxComponent>
+                )}
+                {onDelete && (
+                  <BoxComponent>
+                    <ButtonComponent variant="danger" onClick={onDelete}>
+                      <MdDelete />
+                    </ButtonComponent>
+                  </BoxComponent>
+                )}
+              </FlexComponent>
+            )}
+          </FooterComponent>
+        </BoxComponent>
+      </CardComponent>
+    </>
   )
 }

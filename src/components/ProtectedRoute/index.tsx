@@ -1,11 +1,11 @@
 'use client'
 
 import { useSession } from '@/hooks'
-import { Box } from '@chakra-ui/react'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { MenuComponent } from '../Menu'
-import { OrganizationHandlerComponent } from '../OrganizationHandler'
+import { BoxComponent } from '../Box'
+import { FlexComponent } from '../Flex'
 
 export const ProtectedRouteComponent: FC<ComponentProps> = ({
   children,
@@ -16,22 +16,14 @@ export const ProtectedRouteComponent: FC<ComponentProps> = ({
   return (
     <>
       {user ? (
-        <Box>
+        <BoxComponent>
           {!hideUserSession && (
-            <Box
-              bg="white"
-              w="full"
-              zIndex={99}
-              position="fixed"
-              top="0"
-              boxShadow="md"
-            >
+            <FlexComponent width="100%" justify="end">
               <MenuComponent {...{ user, logout }} />
-              <OrganizationHandlerComponent />
-            </Box>
+            </FlexComponent>
           )}
-          <Box pt="200px">{children}</Box>
-        </Box>
+          <BoxComponent>{children}</BoxComponent>
+        </BoxComponent>
       ) : null}
     </>
   )

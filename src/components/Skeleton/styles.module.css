@@ -1,0 +1,19 @@
+@keyframes skeletonAnimation {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.div {
+  background-color: #e4e4e7;
+  animation-name: skeletonAnimation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  border-radius: 4px;
+}

@@ -1,24 +1,22 @@
 import { FC } from 'react'
 import { ComponentProps } from './types'
 
-export const BoxComponent: FC<ComponentProps> = ({
+export const TextComponent: FC<ComponentProps> = ({
   children,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  textAlign,
   width,
-  height,
-  padding,
-  zIndex,
-  position,
-  top,
 }) => {
   return (
     <div
       style={{
+        fontSize,
+        fontWeight,
+        lineHeight,
+        textAlign,
         width,
-        height,
-        padding,
-        zIndex,
-        position,
-        top,
       }}
     >
       {children}

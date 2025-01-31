@@ -1,20 +1,24 @@
-import { ButtonProps, Text, VStack } from '@chakra-ui/react'
 import { FaPlus } from 'react-icons/fa'
-import { Button } from '../ui/button'
 import { FC } from 'react'
-export const AddNewButtonComponent: FC<ButtonProps> = (props) => {
+import { BoxComponent } from '../Box'
+import { TextComponent } from '../Text'
+import { FlexComponent } from '../Flex'
+import styles from './styles.module.css'
+import { ComponentProps } from './types'
+
+export const AddNewButtonComponent: FC<ComponentProps> = ({
+  width,
+  height,
+  onClick,
+}) => {
   return (
-    <Button
-      variant="outline"
-      h="full"
-      borderWidth={2}
-      borderStyle="dashed"
-      {...props}
-    >
-      <VStack justifyContent="center" alignItems="center" gap={2}>
-        <Text>Agregar nuevo</Text>
-        <FaPlus />
-      </VStack>
-    </Button>
+    <div className={styles.button} onClick={onClick} style={{ width, height }}>
+      <BoxComponent width="100%">
+        <TextComponent textAlign="center">Agregar nuevo</TextComponent>
+        <FlexComponent justify="center" padding="10px 0 0 0">
+          <FaPlus />
+        </FlexComponent>
+      </BoxComponent>
+    </div>
   )
 }

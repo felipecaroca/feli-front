@@ -7,11 +7,12 @@ export const FlexComponent: FC<ComponentProps> = ({
   justify,
   width,
   padding,
+  wrap,
 }) => {
   return (
     <div
-      className={`${style.row} ${style[justify || 'center']}`}
-      style={{ width, padding }}
+      className={style.row}
+      style={{ width, padding, flexWrap: wrap, justifyContent: justify }}
     >
       {children}
     </div>

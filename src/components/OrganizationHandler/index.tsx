@@ -1,10 +1,13 @@
-import { Box, Flex, Text, chakra } from '@chakra-ui/react'
 import { ModalComponent } from '../Modal'
 import { TitleComponent } from '../Title'
-import { SkeletonSquare } from '../ui/skeleton'
 import { OrganizationCardComponent } from '../OrganizationCard'
 import { useOrganizationHandler } from '@/hooks'
-import { Button } from '../ui/button'
+import { SkeletonComponent } from '../Skeleton'
+import { BoxComponent } from '../Box'
+import { TextComponent } from '../Text'
+import { SpanComponent } from '../Span'
+import { ButtonComponent } from '../Button'
+import { FlexComponent } from '../Flex'
 
 export const OrganizationHandlerComponent = () => {
   const {
@@ -17,32 +20,27 @@ export const OrganizationHandlerComponent = () => {
     selectOrganization,
   } = useOrganizationHandler()
   return (
-    <Box p="10px" mt={['50px', '50px', '10px']}>
-      <Flex
-        p="10px"
-        gap="5px"
-        justify="space-between"
-        align="center"
-        maxW="450px"
-        boxShadow="xs"
-      >
-        <Text>
+    <BoxComponent padding="10px">
+      <FlexComponent padding="10px" justify="space-between" width="100%">
+        <TextComponent textAlign="center" width="100%">
           Organización seleccionada:{' '}
-          <chakra.span fontWeight={600}>
+          <SpanComponent fontWeight={600}>
             {currentOrganization?.name}
-          </chakra.span>
-        </Text>
-        <Button variant="ghost" onClick={onOpen}>
-          Cambiar
-        </Button>
-      </Flex>
+          </SpanComponent>
+        </TextComponent>
+        <FlexComponent justify="center" width="100%">
+          <BoxComponent width="100px">
+            <ButtonComponent onClick={onOpen}>Cambiar</ButtonComponent>
+          </BoxComponent>
+        </FlexComponent>
+      </FlexComponent>
       <ModalComponent {...{ open, onClose }}>
-        <Box mb="50px">
+        <BoxComponent padding="0 0 50px 0">
           <TitleComponent>Selecciona una Organización</TitleComponent>
-        </Box>
-        <Flex gap={4} wrap="wrap" justify="center">
+        </BoxComponent>
+        <FlexComponent justify="center">
           {loading ? (
-            <SkeletonSquare noOfLines={3} w={200} h={200} />
+            <SkeletonComponent noOfLines={3} width="200px" height="200px" />
           ) : (
             <>
               {myOrganizations?.map((org) => (
@@ -57,8 +55,8 @@ export const OrganizationHandlerComponent = () => {
               ))}
             </>
           )}
-        </Flex>
+        </FlexComponent>
       </ModalComponent>
-    </Box>
+    </BoxComponent>
   )
 }

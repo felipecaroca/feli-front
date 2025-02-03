@@ -1,47 +1,54 @@
-import {
-  DialogActionTrigger,
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot,
-  DialogTitle,
-} from '../ui/dialog'
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { ComponentProps } from './types'
-import { Button } from '../ui/button'
-import { useModalClose } from '@/hooks'
+
+import { TitleComponent } from '../Title'
+import { FooterComponent } from '../Footer'
+import { FlexComponent } from '../Flex'
+import { BoxComponent } from '../Box'
+import { ButtonComponent } from '../Button'
+import styles from './styles.module.css'
 
 export const ConfirmationDialogComponent: FC<ComponentProps> = ({
   open,
-  onClose,
   children,
   onCancel,
   onConfirm,
   loading,
 }) => {
-  const { onOpenChange } = useModalClose(onClose)
+  const ref = useRef<HTMLDivElement>(null)
+  const ref2 = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (ref?.current && ref2?.current) {
+      ref.current.style.visibility = open ? 'visible' : 'hidden'
+      ref2.current.style.opacity = open ? '1' : '0'
+    }
+  }, [open])
 
   return (
-    <DialogRoot role="alertdialog" {...{ open, onOpenChange }}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Confirmar</DialogTitle>
-        </DialogHeader>
-        <DialogBody>{children}</DialogBody>
-        <DialogFooter>
-          <DialogActionTrigger asChild>
-            <Button variant="outline" onClick={onCancel} disabled={loading}>
-              Cancelar
-            </Button>
-          </DialogActionTrigger>
-          <Button colorPalette="red" onClick={onConfirm} loading={loading}>
-            Confirmar
-          </Button>
-        </DialogFooter>
-        <DialogCloseTrigger />
-      </DialogContent>
-    </DialogRoot>
+    <div className={styles.modal} ref={ref}>
+      <div ref={ref2}>
+        <TitleComponent>Confirmar</TitleComponent>
+        <BoxComponent padding="0 0 40px 0">{children}</BoxComponent>
+        <FooterComponent>
+          <FlexComponent justify="end">
+            <BoxComponent>
+              <ButtonComponent onClick={onCancel} disabled={loading}>
+                Cancelar
+              </ButtonComponent>
+            </BoxComponent>
+            <BoxComponent>
+              <ButtonComponent
+                onClick={onConfirm}
+                variant="danger"
+                loading={loading}
+              >
+                Confirmar
+              </ButtonComponent>
+            </BoxComponent>
+          </FlexComponent>
+        </FooterComponent>
+      </div>
+    </div>
   )
 }

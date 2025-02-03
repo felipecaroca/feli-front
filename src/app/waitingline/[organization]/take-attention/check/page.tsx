@@ -1,16 +1,14 @@
 'use client'
 
-import { WithOrganizationParam } from '@/commons'
 import {
   FullScreenCenterComponent,
   ModuleCardComponent,
   TitleComponent,
 } from '@/components'
 import { useTakeAttentionCheckPage } from '@/hooks'
-import { FC } from 'react'
 
-const TakeAttentionCheckPage: FC<WithOrganizationParam> = (props) => {
-  const { modules, onCardClick } = useTakeAttentionCheckPage(props)
+const TakeAttentionCheckPage = () => {
+  const { modules, onCardClick } = useTakeAttentionCheckPage()
 
   if (modules === undefined) return null
 

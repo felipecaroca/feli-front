@@ -1,12 +1,11 @@
 'use client'
 
-import { WithOrganizationParam } from '@/commons'
-import { useParam } from '../useParam'
+import { useParams } from 'next/navigation'
 
-export const useOrganizationParam = ({ params }: WithOrganizationParam) => {
-  const { param: organization } = useParam(params, 'organization')
+export const useOrganizationParam = () => {
+  const { organization } = useParams()
 
   return {
-    organization,
+    organization: organization?.toString() || '',
   }
 }

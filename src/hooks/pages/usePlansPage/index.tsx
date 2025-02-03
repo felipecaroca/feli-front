@@ -30,5 +30,6 @@ export const usePlansPage = () => {
     onSeeMore,
     onSelect,
     selectedApps,
+    seeMore,
   }
 }

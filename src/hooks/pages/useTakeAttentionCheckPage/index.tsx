@@ -1,16 +1,16 @@
 'use client'
 
-import { ModuleModel, WAITINGLINE_URL, WithOrganizationParam } from '@/commons'
+import { ModuleModel, WAITINGLINE_URL } from '@/commons'
 import { useModulesCRUD, useOrganizationParam } from '@/hooks'
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-export const useTakeAttentionCheckPage = (props: WithOrganizationParam) => {
+export const useTakeAttentionCheckPage = () => {
   const [modules, setModules] = useState<ModuleModel[] | undefined>()
   const { getModules } = useModulesCRUD()
   const router = useRouter()
-  const { organization } = useOrganizationParam(props)
+  const { organization } = useOrganizationParam()
 
   const onCardClick = (selectedModule: ModuleModel) =>
     router.push(`${selectedModule.id}`)

@@ -2,7 +2,7 @@ import { Box, VStack, Text, Flex } from '@chakra-ui/react'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { renderAttentionName, renderAttentionNumber } from '@/commons'
-import { Button } from '../ui/button'
+import { ButtonComponent } from '../Button'
 
 export const CurrentAttentionComponent: FC<ComponentProps> = ({
   attention,
@@ -23,38 +23,32 @@ export const CurrentAttentionComponent: FC<ComponentProps> = ({
 
       <VStack gap={2} justify="center" alignItems="center" pt={20}>
         <Box w="full" maxW={300}>
-          <Button
-            w="full"
-            maxW={300}
+          <ButtonComponent
             onClick={() => onCall(attention)}
             disabled={!attention}
-            colorPalette="blue"
+            variant="info"
             loading={calling}
           >
             Llamar
-          </Button>
+          </ButtonComponent>
         </Box>
         <Box w="full" maxW={300}>
-          <Button
-            w="full"
-            maxW={300}
+          <ButtonComponent
             onClick={() => onSkip(attention)}
             disabled={!attention}
-            colorPalette="orange"
+            variant="warning"
           >
             Saltar
-          </Button>
+          </ButtonComponent>
         </Box>
         <Box w="full" maxW={300}>
-          <Button
-            w="full"
-            maxW={300}
-            colorPalette="green"
+          <ButtonComponent
+            variant="success"
             onClick={() => onOk(attention)}
             disabled={!attention}
           >
             Finalizar OK
-          </Button>
+          </ButtonComponent>
         </Box>
       </VStack>
     </Box>

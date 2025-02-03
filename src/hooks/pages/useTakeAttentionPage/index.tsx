@@ -1,22 +1,15 @@
 'use client'
 
-import {
-  CreateAttentionInput,
-  WAITINGLINE_URL,
-  WithModuleParam,
-  WithOrganizationParam,
-} from '@/commons'
+import { CreateAttentionInput, WAITINGLINE_URL } from '@/commons'
 import { useAttentionsCRUD } from '@/hooks/useAttentionsCRUD'
 import { useModuleIdParam } from '@/hooks/useModuleIdParam'
 
 import { useOrganizationParam } from '@/hooks/useOrganizationParam'
 import { useRouter } from 'next/navigation'
 
-export const useTakeAttentionPage = (
-  props: WithOrganizationParam & WithModuleParam
-) => {
-  const { organization } = useOrganizationParam(props)
-  const { moduleId } = useModuleIdParam(props)
+export const useTakeAttentionPage = () => {
+  const { organization } = useOrganizationParam()
+  const { moduleId } = useModuleIdParam()
   const { createAttention, creating } = useAttentionsCRUD()
 
   const router = useRouter()

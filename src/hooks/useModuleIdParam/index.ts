@@ -1,12 +1,11 @@
-import { WithModuleParam } from '@/commons'
-import { useParam } from '../useParam'
+import { useParams } from 'next/navigation'
 
 
-export const useModuleIdParam = ({params}: WithModuleParam) => {
+export const useModuleIdParam = () => {
 
-  const {param: moduleId} = useParam(params, 'moduleId')
+  const {moduleId} = useParams()
 
   return {
-    moduleId
+    moduleId: moduleId?.toString() ||''
   }
 }

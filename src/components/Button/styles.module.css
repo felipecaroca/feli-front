@@ -4,6 +4,7 @@
   padding: 4px 10px;
   opacity: 0.9;
   width: 100%;
+  min-height: 38px;
 }
 
 .button:hover {
@@ -42,4 +43,30 @@
   border: 1px solid #ffc107;
   background-color: #ffc107;
   color: #000;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@keyframes load {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+.loading {
+  animation: load;
+  animation-iteration-count: infinite;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
 }

@@ -1,9 +1,12 @@
 'use client'
 
 import { WAITINGLINE_MENU } from '@/commons'
-import NeedOrganizationComponent from '@/components/NeedOrganization'
-import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
-import { Button } from '@/components/ui/button'
+import {
+  BoxComponent,
+  ButtonComponent,
+  NeedOrganizationComponent,
+  ProtectedRouteComponent,
+} from '@/components'
 
 import { useHomePage } from '@/hooks'
 import { Flex } from '@chakra-ui/react'
@@ -24,15 +27,11 @@ export default function Home() {
           mt={['200px', 'unset']}
         >
           {menu.map((item) => (
-            <Button
-              key={item.name}
-              variant="outline"
-              onClick={() => onClick(item)}
-              w="200px"
-              h="200px"
-            >
-              {item.name}
-            </Button>
+            <BoxComponent key={item.name}>
+              <ButtonComponent onClick={() => onClick(item)}>
+                {item.name}
+              </ButtonComponent>
+            </BoxComponent>
           ))}
         </Flex>
       </NeedOrganizationComponent>

@@ -13,7 +13,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
-import { Button } from '../ui/button'
 
 import { Box, Flex, Link as ChakraLink, Text } from '@chakra-ui/react'
 import { Avatar } from '@/components/ui/avatar'
@@ -29,6 +28,7 @@ import { menuAtom } from '@/commons'
 import { sections } from './constants'
 import Link from 'next/link'
 import { OrganizationHandlerComponent } from '../OrganizationHandler'
+import { ButtonComponent } from '../Button'
 
 export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
   const [menuKey, setMenuKey] = useAtom(menuAtom)
@@ -38,9 +38,7 @@ export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
     <DrawerRoot>
       <DrawerBackdrop />
       <DrawerTrigger asChild>
-        <Button variant="outline" size="sm" m={4}>
-          Menu
-        </Button>
+        <ButtonComponent>Menu</ButtonComponent>
       </DrawerTrigger>
       <DrawerContent offset="4" rounded="md">
         <DrawerHeader borderBottom="1px solid" borderBottomColor="gray.300">
@@ -86,9 +84,7 @@ export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
           </AccordionRoot>
         </DrawerBody>
         <DrawerFooter>
-          <Button onClick={logout} w="full">
-            Cerrar sesión
-          </Button>
+          <ButtonComponent onClick={logout}>Cerrar sesión</ButtonComponent>
         </DrawerFooter>
         <DrawerCloseTrigger />
       </DrawerContent>

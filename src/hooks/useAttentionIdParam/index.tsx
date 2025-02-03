@@ -1,10 +1,9 @@
-import { WithAttentionParam } from '@/commons'
-import { useParam } from '../useParam'
+import { useParams } from 'next/navigation'
 
-export const useAttentionIdParam = ({ params }: WithAttentionParam) => {
-  const { param: attentionId } = useParam(params, 'attentionId')
+export const useAttentionIdParam = () => {
+  const { attentionId } = useParams()
 
   return {
-    attentionId,
+    attentionId: attentionId?.toString() || '',
   }
 }

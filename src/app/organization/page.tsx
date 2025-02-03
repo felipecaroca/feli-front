@@ -66,7 +66,6 @@ const OrganizationPage = () => {
         onCancel={onCancel}
         onConfirm={onDeleteOrganization}
         open={confirmIsOpen}
-        onClose={onCancel}
         loading={deleting}
       >
         <TextComponent>

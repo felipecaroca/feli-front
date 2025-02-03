@@ -1,9 +1,10 @@
-import { Box, Flex } from '@chakra-ui/react'
 import { ModalComponent } from '../Modal'
 import { TitleComponent } from '../Title'
 import { ModuleFormComponent } from '../ModuleForm'
 import { FC } from 'react'
 import { ComponentProps } from './types'
+import { FlexComponent } from '../Flex'
+import { BoxComponent } from '../Box'
 
 export const ModuleFormModalComponent: FC<ComponentProps> = ({
   open,
@@ -16,11 +17,11 @@ export const ModuleFormModalComponent: FC<ComponentProps> = ({
   return (
     <ModalComponent {...{ open, onClose }}>
       <TitleComponent>{title || 'Agregar nuevo módulo'}</TitleComponent>
-      <Flex justify="center" alignItems="center" mt={10}>
-        <Box w={['full', 'full', '80%', '60%', '40%']}>
+      <FlexComponent justify="center">
+        <BoxComponent width="100%">
           <ModuleFormComponent {...{ onSubmit, loading, defaultValues }} />
-        </Box>
-      </Flex>
+        </BoxComponent>
+      </FlexComponent>
     </ModalComponent>
   )
 }

@@ -1,17 +1,12 @@
 'use client'
 
-import {
-  ModuleModel,
-  organizationAtom,
-  SaveModInput,
-  WithOrganizationParam,
-} from '@/commons'
+import { ModuleModel, organizationAtom, SaveModInput } from '@/commons'
 import { useModulesCRUD } from '@/hooks'
 import { useDisclosure } from '@chakra-ui/react'
 import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 
-export const useModulesPage = (props: WithOrganizationParam) => {
+export const useModulesPage = () => {
   const [modules, setModules] = useState<ModuleModel[]>([])
   const [forDelete, setForDelete] = useState<ModuleModel | undefined>()
   const [forUpdate, setForUpdate] = useState<ModuleModel | undefined>()

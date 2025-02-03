@@ -1,15 +1,18 @@
 'use client'
 
 import { Box, Flex, Text, chakra } from '@chakra-ui/react'
-import { FC } from 'react'
+
 import QRCode from 'react-qr-code'
 import { useQrCodePage } from '@/hooks'
-import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
-import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
-import NeedOrganizationComponent from '@/components/NeedOrganization'
+import {
+  BoxComponent,
+  ButtonComponent,
+  NeedOrganizationComponent,
+  ProtectedRouteComponent,
+} from '@/components'
 
-const QrCodePage: FC = () => {
+const QrCodePage = () => {
   const { qrValue: value, showForManager, hidden, setHidden } = useQrCodePage()
 
   return (
@@ -37,13 +40,11 @@ const QrCodePage: FC = () => {
                   </Box>
 
                   {!hidden && showForManager && (
-                    <Button
-                      my="4"
-                      variant="outline"
-                      onClick={() => setHidden(true)}
-                    >
-                      Imprimir
-                    </Button>
+                    <BoxComponent padding="20px 0 0 0">
+                      <ButtonComponent onClick={() => setHidden(true)}>
+                        Imprimir
+                      </ButtonComponent>
+                    </BoxComponent>
                   )}
                 </>
               )}

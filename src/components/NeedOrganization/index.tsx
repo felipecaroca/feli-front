@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useAtomValue } from 'jotai'
 import { Alert } from '../ui/alert'
 
-const NeedOrganizationComponent: FC<WithChildren> = ({ children }) => {
+export const NeedOrganizationComponent: FC<WithChildren> = ({ children }) => {
   const { getMyOrganizations, getting } = useOrganizationCRUD()
   const currentOrganization = useAtomValue(organizationAtom)
   const router = useRouter()
@@ -42,5 +42,3 @@ const NeedOrganizationComponent: FC<WithChildren> = ({ children }) => {
     </>
   )
 }
-
-export default NeedOrganizationComponent

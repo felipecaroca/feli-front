@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  AttentionModel,
-  ModuleModel,
-  organizationAtom,
-  WithModuleParam,
-} from '@/commons'
+import { AttentionModel, ModuleModel, organizationAtom } from '@/commons'
 import {
   useModuleIdParam,
   useManageAttention,
@@ -15,10 +10,10 @@ import {
 import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 
-export const useManageModuleAttentionPage = (props: WithModuleParam) => {
+export const useManageModuleAttentionPage = () => {
   const [module, setModule] = useState<ModuleModel | undefined>()
   const currentOrganization = useAtomValue(organizationAtom)
-  const { moduleId } = useModuleIdParam(props)
+  const { moduleId } = useModuleIdParam()
   const { getModule } = useModulesCRUD()
   const { socket } = useSocket()
   const organizationId = currentOrganization?.id || ''

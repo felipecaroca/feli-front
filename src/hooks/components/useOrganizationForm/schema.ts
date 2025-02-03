@@ -18,19 +18,4 @@ export const schema = z.object({
       })).min(1, '*Selecciona al menos 1 permiso para el colaborador')
     })
   )
-  .superRefine((data, ctx) => {
-    // console.log(data)
-  //   data.forEach((item, index) => {
-  //     if(!item.email) return
-
-  //     const resp = data.filter(a => a.email === item.email && a.app === item.app)
-
-  //     if(resp.length >1)
-  //       ctx.addIssue({
-  //         code: z.ZodIssueCode.custom,
-  //         message: `*Ya se encuentra esta aplicación para el correo ${item.email}`,
-  //         path: [`[${index}].app`]
-  //       })
-  //   })
-  })
 })

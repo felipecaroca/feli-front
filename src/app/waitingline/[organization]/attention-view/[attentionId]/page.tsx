@@ -1,6 +1,5 @@
 'use client'
 
-import { WithAttentionParam, WithOrganizationParam } from '@/commons'
 import {
   AcceptAudioButtonComponent,
   AttentionTicketComponent,
@@ -9,13 +8,10 @@ import {
 } from '@/components'
 
 import { useYourAttentionPage } from '@/hooks'
-import { FC } from 'react'
 
-const YourAttetionPage: FC<WithOrganizationParam & WithAttentionParam> = (
-  props
-) => {
+const YourAttetionPage = () => {
   const { attention, loading, acceptAudio, isServiceWorkerCompatible } =
-    useYourAttentionPage(props)
+    useYourAttentionPage()
 
   return (
     <FullScreenCenterComponent>

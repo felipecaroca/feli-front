@@ -1,6 +1,5 @@
 'use client'
 
-import { WithModuleParam, WithOrganizationParam } from '@/commons'
 import {
   AttentionFormComponent,
   FullScreenCenterComponent,
@@ -10,12 +9,8 @@ import {
 import { useTakeAttentionPage } from '@/hooks'
 import { Box } from '@chakra-ui/react'
 
-import { FC } from 'react'
-
-const TakeAttetionPage: FC<WithOrganizationParam & WithModuleParam> = (
-  props
-) => {
-  const { onSubmit, creating: loading } = useTakeAttentionPage(props)
+const TakeAttetionPage = () => {
+  const { onSubmit, creating: loading } = useTakeAttentionPage()
 
   return (
     <FullScreenCenterComponent>

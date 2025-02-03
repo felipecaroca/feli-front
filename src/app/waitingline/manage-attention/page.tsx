@@ -2,17 +2,17 @@
 
 import {
   AttentionListComponent,
+  ButtonComponent,
   ConfirmationDialogComponent,
   CurrentAttentionComponent,
+  NeedOrganizationComponent,
+  ProtectedRouteComponent,
   TitleComponent,
 } from '@/components'
 import { useManageAttentionPage } from '@/hooks'
 import { Box, Flex } from '@chakra-ui/react'
 import { FC } from 'react'
-import { Button } from '@/components/ui/button'
 import { Alert } from '@/components/ui/alert'
-import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
-import NeedOrganizationComponent from '@/components/NeedOrganization'
 
 const ManageAttentionPage: FC = () => {
   const {
@@ -71,33 +71,32 @@ const ManageAttentionPage: FC = () => {
                 p={6}
               >
                 <Flex justify="end" py={4}>
-                  <Button
-                    colorPalette="green"
+                  <ButtonComponent
+                    variant="success"
                     onClick={onNext}
                     disabled={noAttentionsAvailable}
                     loading={changing}
                   >
                     Atender siguiente
-                  </Button>
+                  </ButtonComponent>
                 </Flex>
                 <Box>
                   <AttentionListComponent {...{ attentions, getting }} />
                 </Box>
                 <Flex justify="center" py={4}>
-                  <Button
-                    colorPalette="red"
+                  <ButtonComponent
+                    variant="danger"
                     onClick={onReset}
                     disabled={resetting}
                   >
                     Resetear lista
-                  </Button>
+                  </ButtonComponent>
                 </Flex>
               </Box>
               <ConfirmationDialogComponent
                 onCancel={onCloseConfirmation}
                 onConfirm={() => onConfirm(confirmationContent?.action)}
                 open={!!confirmationContent}
-                onClose={onCloseConfirmation}
                 loading={resetting || changing}
               >
                 {confirmationContent?.text || ''}

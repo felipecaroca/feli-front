@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { ComponentProps } from './types'
 import { Box, Input, Flex } from '@chakra-ui/react'
 import { useAttentionForm } from '@/hooks'
-import { Button } from '../ui/button'
 import { FormControllerComponent } from '../FormController'
+import { ButtonComponent } from '../Button'
 
 export const AttentionFormComponent: FC<ComponentProps> = ({
   onSubmit,
@@ -31,9 +31,9 @@ export const AttentionFormComponent: FC<ComponentProps> = ({
         </FormControllerComponent>
 
         <Flex justify="end" py={2}>
-          <Button type="submit" {...{ loading }}>
+          <ButtonComponent type="submit" {...{ loading }}>
             Tomar Número de atención
-          </Button>
+          </ButtonComponent>
         </Flex>
       </form>
     </Box>

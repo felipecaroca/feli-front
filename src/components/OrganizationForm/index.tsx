@@ -1,6 +1,5 @@
 import { Box, Flex, Input } from '@chakra-ui/react'
 import { FormControllerComponent } from '../FormController'
-import { Button } from '../ui/button'
 import { FC } from 'react'
 import { ComponentProps } from './types'
 import { useOrganizationForm } from '@/hooks'
@@ -12,6 +11,7 @@ import {
 import { Checkbox } from '../ui/checkbox'
 import { ErrorMessageComponent } from '../ErrorMessage'
 import { BoxComponent } from '../Box'
+import { ButtonComponent } from '../Button'
 
 // TODO: refactorizar para que quede ordenado
 export const OrganizationFormComponent: FC<ComponentProps> = ({
@@ -140,28 +140,27 @@ export const OrganizationFormComponent: FC<ComponentProps> = ({
             />
           </Box>
 
-          <Box pt="34px">
-            <Button colorPalette="red" onClick={() => remove(index)}>
+          <BoxComponent padding="34px 0 0 0">
+            <ButtonComponent variant="danger" onClick={() => remove(index)}>
               Eliminar
-            </Button>
-          </Box>
+            </ButtonComponent>
+          </BoxComponent>
         </Flex>
       ))}
 
       {fields.length < MAX_COLLABORATORS_ALLOWED && (
         <Flex mb="10px" justify="center">
-          <Button
-            colorPalette="cyan"
+          <ButtonComponent
             onClick={() => append({ email: '', permissions: [] })}
           >
             Agregar Colaborador
-          </Button>
+          </ButtonComponent>
         </Flex>
       )}
 
-      <Button type="submit" w="full" loading={loading}>
+      <ButtonComponent type="submit" variant="success" loading={loading}>
         {buttonText || 'Crear'}
-      </Button>
+      </ButtonComponent>
     </form>
   )
 }

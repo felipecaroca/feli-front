@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  AttentionModel,
-  WithAttentionParam,
-  WithOrganizationParam,
-} from '@/commons'
+import { AttentionModel } from '@/commons'
 import {
   useAttentionIdParam,
   useAttentionsCRUD,
@@ -15,13 +11,11 @@ import { useOrganizationParam } from '@/hooks/useOrganizationParam'
 import { useEffect, useState } from 'react'
 import { Socket } from 'socket.io-client'
 
-export const useYourAttentionPage = (
-  props: WithOrganizationParam & WithAttentionParam
-) => {
+export const useYourAttentionPage = () => {
   const [attention, setAttention] = useState<AttentionModel | undefined>()
   const [socket, setSocket] = useState<Socket | undefined>()
-  const { organization } = useOrganizationParam(props)
-  const { attentionId } = useAttentionIdParam(props)
+  const { organization } = useOrganizationParam()
+  const { attentionId } = useAttentionIdParam()
   const [audioAccepted, setAudioAccepted] = useState<boolean>(false)
   const { getAttention, gettingOne } = useAttentionsCRUD()
   const { connectSocket } = useSocket(true)

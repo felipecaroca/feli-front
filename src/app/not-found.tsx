@@ -7,8 +7,8 @@ const NotFoundPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace('/login')
-  }, [])
+    if (router) router.replace('/login')
+  }, [router])
 
   return 'vamo al login'
 }

@@ -11,10 +11,18 @@ import { useSession } from '@/hooks'
 import { useGoogleOneTapLogin } from '@react-oauth/google'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { WAITINGLINE_URL } from '@/commons'
 
 const LoginPage = () => {
+  return (
+    <Suspense>
+      <LoginContent />
+    </Suspense>
+  )
+}
+
+const LoginContent = () => {
   const { saveToken, logout } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -30,8 +38,8 @@ const LoginPage = () => {
   })
 
   useEffect(() => {
-    logout()
-  }, [])
+    if (typeof logout === 'function') logout()
+  }, [logout])
 
   return (
     <FullScreenCenterComponent>

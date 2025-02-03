@@ -1,11 +1,14 @@
 'use client'
 
-import { ModulesListComponent, TitleComponent } from '@/components'
+import {
+  ModulesListComponent,
+  NeedOrganizationComponent,
+  ProtectedRouteComponent,
+  TitleComponent,
+} from '@/components'
 import { Box } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useAttendPage } from '@/hooks'
-import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
-import NeedOrganizationComponent from '@/components/NeedOrganization'
 
 const AttendPage: FC = () => {
   const { modules, getting, hasModules, onCardClick } = useAttendPage()

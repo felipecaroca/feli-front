@@ -1,40 +1,37 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 
-import {
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogRoot,
-  DialogTitle,
-} from '../ui/dialog'
 import { ComponentProps } from './types'
-import { useModalClose } from '@/hooks'
+import styles from './styles.module.css'
+import { BiX } from 'react-icons/bi'
 
 export const ModalComponent: FC<ComponentProps> = ({
-  header,
-  footer,
   onClose,
-  ...props
+  children,
+  open,
 }) => {
-  const { onOpenChange } = useModalClose(onClose)
+  const ref = useRef<HTMLDivElement>(null)
+  const ref2 = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (ref?.current && ref2?.current) {
+      ref.current.style.visibility = open ? 'visible' : 'hidden'
+      ref2.current.style.opacity = open ? '1' : '0'
+    }
+  }, [open])
 
   return (
-    <DialogRoot
-      size="cover"
-      motionPreset="slide-in-bottom"
-      {...{ ...props, onOpenChange }}
-    >
-      <DialogContent>
-        {header && (
-          <DialogHeader>
-            <DialogTitle>{header}</DialogTitle>
-          </DialogHeader>
-        )}
-        <DialogBody>{props.children}</DialogBody>
-        {footer && footer}
-        <DialogCloseTrigger />
-      </DialogContent>
-    </DialogRoot>
+    <div className={styles.modal} ref={ref} onClick={onClose}>
+      <div
+        ref={ref2}
+        onClick={(e) => {
+          e.stopPropagation()
+        }}
+      >
+        <button className={styles.closeButton} onClick={onClose}>
+          <BiX />
+        </button>
+        {children}
+      </div>
+    </div>
   )
 }

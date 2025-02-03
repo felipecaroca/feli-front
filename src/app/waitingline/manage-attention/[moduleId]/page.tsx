@@ -2,20 +2,19 @@
 
 import {
   AttentionListComponent,
+  ButtonComponent,
   ConfirmationDialogComponent,
   CurrentAttentionComponent,
+  NeedOrganizationComponent,
+  ProtectedRouteComponent,
   TitleComponent,
 } from '@/components'
 import { Box, Flex } from '@chakra-ui/react'
-import { FC } from 'react'
-import { PageProps } from './type'
-import { useManageModuleAttentionPage } from '@/hooks'
-import { Button } from '@/components/ui/button'
-import { Alert } from '@/components/ui/alert'
-import { ProtectedRouteComponent } from '@/components/ProtectedRoute'
-import NeedOrganizationComponent from '@/components/NeedOrganization'
 
-const ManageModuleAttentionPage: FC<PageProps> = (props) => {
+import { useManageModuleAttentionPage } from '@/hooks'
+import { Alert } from '@/components/ui/alert'
+
+const ManageModuleAttentionPage = () => {
   const {
     module,
     attentions,
@@ -33,7 +32,7 @@ const ManageModuleAttentionPage: FC<PageProps> = (props) => {
     resetting,
     changing,
     calling,
-  } = useManageModuleAttentionPage(props)
+  } = useManageModuleAttentionPage()
 
   return (
     <ProtectedRouteComponent>
@@ -75,33 +74,32 @@ const ManageModuleAttentionPage: FC<PageProps> = (props) => {
                 p={6}
               >
                 <Flex justify="end" py={4}>
-                  <Button
-                    colorPalette="green"
+                  <ButtonComponent
+                    variant="success"
                     onClick={onNext}
                     disabled={noAttentionsAvailable}
                     loading={changing}
                   >
                     Atender siguiente
-                  </Button>
+                  </ButtonComponent>
                 </Flex>
                 <Box>
                   <AttentionListComponent {...{ attentions, getting }} />
                 </Box>
                 <Flex justify="center" py={4}>
-                  <Button
-                    colorPalette="red"
+                  <ButtonComponent
+                    variant="danger"
                     onClick={onReset}
                     disabled={noAttentionsAvailable || resetting}
                   >
                     Resetear lista
-                  </Button>
+                  </ButtonComponent>
                 </Flex>
               </Box>
               <ConfirmationDialogComponent
                 onCancel={onCloseConfirmation}
                 onConfirm={() => onConfirm(confirmationContent?.action)}
                 open={!!confirmationContent}
-                onClose={onCloseConfirmation}
                 loading={resetting || changing}
               >
                 {confirmationContent?.text || ''}

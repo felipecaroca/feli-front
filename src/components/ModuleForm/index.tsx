@@ -1,20 +1,21 @@
 import { FC } from 'react'
 import { ComponentProps } from './types'
-import { Box, Textarea, Input, Flex } from '@chakra-ui/react'
+import { Textarea, Input } from '@chakra-ui/react'
 import { useModuleForm } from '@/hooks'
-import { Button } from '../ui/button'
 import { FormControllerComponent } from '../FormController'
+import { ButtonComponent } from '../Button'
+import { BoxComponent } from '../Box'
+import { FlexComponent } from '../Flex'
 
 export const ModuleFormComponent: FC<ComponentProps> = ({
   onSubmit,
   loading,
   defaultValues,
 }) => {
-  console.log(defaultValues)
   const { control, handleSubmit } = useModuleForm(defaultValues)
 
   return (
-    <Box w="full">
+    <BoxComponent>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControllerComponent
           {...{ name: 'name', control, label: 'Nombre del módulo' }}
@@ -61,12 +62,14 @@ export const ModuleFormComponent: FC<ComponentProps> = ({
           )}
         </FormControllerComponent>
 
-        <Flex justify="end" py={2}>
-          <Button type="submit" {...{ loading }}>
-            Guardar
-          </Button>
-        </Flex>
+        <FlexComponent justify="end">
+          <BoxComponent padding="10px 0 0 0">
+            <ButtonComponent type="submit" {...{ loading }}>
+              Guardar
+            </ButtonComponent>
+          </BoxComponent>
+        </FlexComponent>
       </form>
-    </Box>
+    </BoxComponent>
   )
 }

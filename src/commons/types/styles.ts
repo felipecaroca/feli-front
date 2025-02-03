@@ -10,3 +10,5 @@ export type PaddingPixels = SinglePixel | DoublePixel | TriplePixel | QuadPixel;
 export type VariantsType = 'default' | 'success' | 'info' | 'danger' | 'warning'
 
 export type PositionType = 'absolute' | 'relative' | 'fixed'
+
+export type FlexDirectionType = 'column'|'row'

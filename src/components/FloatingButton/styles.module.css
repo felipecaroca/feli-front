@@ -1,0 +1,31 @@
+.floatingButton {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  box-shadow: 0 0 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.floatingButton:hover {
+  box-shadow: 0 0 15px 0;
+}
+
+.floatingButton:active {
+  box-shadow: 0 0 10px 0;
+}
+
+.span {
+  position: fixed;
+  background-color: blue;
+  border-radius: 100%;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

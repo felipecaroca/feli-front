@@ -7,11 +7,12 @@ export const SkeletonComponent: FC<ComponentProps> = ({
   width,
   height,
   noOfLines,
+  direction,
 }) => {
   const iterator = [...Array(noOfLines || 1).keys()]
 
   return (
-    <FlexComponent>
+    <FlexComponent direction={direction}>
       {iterator.map((i) => (
         <div className={styles.div} key={i} style={{ width, height }} />
       ))}

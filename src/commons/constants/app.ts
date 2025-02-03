@@ -1,3 +1,5 @@
+export const IVA_VALUE = 0.19
+
 export const WAITINGLINE_URL = '/waitingline'
 export const ORGANIZATION_URL = '/organization'
 

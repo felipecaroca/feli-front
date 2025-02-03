@@ -4,6 +4,7 @@ import {
   AppSelectionCardComponent,
   BoxComponent,
   FlexComponent,
+  FloatingButtonComponent,
   SkeletonComponent,
   TitleComponent,
 } from '@/components'
@@ -12,7 +13,8 @@ import { usePlansPage } from '@/hooks'
 import { FaShoppingCart } from 'react-icons/fa'
 
 const PlansPage = () => {
-  const { apps, loading, onSeeMore, onSelect, selectedApps } = usePlansPage()
+  const { apps, loading, onSeeMore, onSelect, selectedApps, onCartClick } =
+    usePlansPage()
 
   return loading ? (
     <BoxComponent>
@@ -44,24 +46,14 @@ const PlansPage = () => {
         ))}
       </FlexComponent>
       {selectedApps?.length > 0 && (
-        <button
-          style={{
-            backgroundColor: '#fff',
-            position: 'fixed',
-            right: '30px',
-            bottom: '30px',
-            width: '60px',
-            height: '60px',
-            borderRadius: '100%',
-            boxShadow: '0 0 10px 0',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            cursor: 'pointer',
-          }}
+        <FloatingButtonComponent
+          onClick={onCartClick}
+          spanNum={selectedApps.length}
+          right="30px"
+          bottom="30px"
         >
           <FaShoppingCart size="30px" />
-        </button>
+        </FloatingButtonComponent>
       )}
     </div>
   )

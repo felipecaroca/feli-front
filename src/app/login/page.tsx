@@ -3,16 +3,12 @@
 import {
   BoxComponent,
   FullScreenCenterComponent,
-  MovingArrowComponent,
+  GoogleButtonComponent,
   TextComponent,
   TitleComponent,
 } from '@/components'
-import { useSession } from '@/hooks'
-import { useGoogleOneTapLogin } from '@react-oauth/google'
-import { useRouter, useSearchParams } from 'next/navigation'
 
-import { Suspense, useEffect } from 'react'
-import { WAITINGLINE_URL } from '@/commons'
+import { Suspense } from 'react'
 
 const LoginPage = () => {
   return (
@@ -23,35 +19,16 @@ const LoginPage = () => {
 }
 
 const LoginContent = () => {
-  const { saveToken, logout } = useSession()
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  useGoogleOneTapLogin({
-    onSuccess: (credentialResponse) => {
-      if (credentialResponse.credential) {
-        saveToken(credentialResponse.credential)
-        const returnUrl = searchParams.get('returnUrl')
-        router.replace(returnUrl || WAITINGLINE_URL)
-      }
-    },
-  })
-
-  useEffect(() => {
-    if (typeof logout === 'function') logout()
-  }, [logout])
-
   return (
     <FullScreenCenterComponent>
-      <MovingArrowComponent top="20%" right="30%" />
-      <MovingArrowComponent top="40%" right="28%" degrees={-20} />
-      <MovingArrowComponent bottom="30%" right="10%" degrees={-90} />
-
       <BoxComponent padding="25px">
         <TitleComponent>No estas logueado</TitleComponent>
         <TextComponent textAlign="center">
           Inicia sesión con tu cuenta de google
         </TextComponent>
+        <BoxComponent padding="30px 0 0 0">
+          <GoogleButtonComponent>Iniciar Sesión</GoogleButtonComponent>
+        </BoxComponent>
       </BoxComponent>
     </FullScreenCenterComponent>
   )

@@ -1,0 +1,15 @@
+.googleButton {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #a1a1a1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.googleButton:hover {
+  box-shadow: 0 0 4px 0;
+}
+
+.googleButton:active {
+  box-shadow: none;
+}

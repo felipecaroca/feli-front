@@ -1,4 +1,5 @@
 import { appsSelectedAtom, IVA_VALUE, sumFieldFromArray } from '@/commons'
+import { useSession } from '@/hooks/useSession'
 import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 
@@ -8,6 +9,7 @@ export const useCartPage = () => {
   const [total, setTotal] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
   const appsSelected = useAtomValue(appsSelectedAtom)
+  const { user } = useSession(true)
 
   useEffect(() => {
     if (appsSelected.length > 0) {
@@ -28,5 +30,6 @@ export const useCartPage = () => {
     subTotal,
     total,
     iva,
+    user,
   }
 }

@@ -2,7 +2,9 @@
 
 import {
   BoxComponent,
+  ButtonComponent,
   FlexComponent,
+  GoogleButtonComponent,
   SkeletonComponent,
   TextComponent,
   TitleComponent,
@@ -11,7 +13,7 @@ import styles from './styles.module.css'
 import { useCartPage } from '@/hooks'
 
 const PlansCardPage = () => {
-  const { apps, subTotal, total, iva, loading } = useCartPage()
+  const { apps, subTotal, total, iva, loading, user } = useCartPage()
 
   return (
     <BoxComponent>
@@ -50,6 +52,16 @@ const PlansCardPage = () => {
                 ${total.toLocaleString('es-CL')}
               </TextComponent>
             </FlexComponent>
+
+            <BoxComponent width="300px" padding="20px 0 0 0">
+              {user ? (
+                <ButtonComponent>Contratar</ButtonComponent>
+              ) : (
+                <GoogleButtonComponent returnUrl="/plans/cart">
+                  Registrate con google
+                </GoogleButtonComponent>
+              )}
+            </BoxComponent>
           </>
         )}
       </FlexComponent>

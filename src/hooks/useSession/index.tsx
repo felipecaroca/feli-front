@@ -7,7 +7,7 @@ import { googleLogout } from '@react-oauth/google'
 
 import { useEffect } from 'react'
 
-export const useSession = () => {
+export const useSession = (noRedirect?: boolean) => {
   const [token, setToken] = useAtom(authTokenAtom)
   const [user, setUser] = useAtom(authUserAtom)
   const router = useRouter()
@@ -22,8 +22,8 @@ export const useSession = () => {
     if (token) {
       getMe()
         .then((res) => setUser(res))
-        .catch(() => goToLogin())
-    } else goToLogin()
+        .catch(() => !noRedirect && goToLogin())
+    } else if (!noRedirect) goToLogin()
   }, [token])
 
   return {

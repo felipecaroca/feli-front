@@ -1,11 +1,19 @@
 'use client'
 
-import { ORGANIZATION_URL } from '@/commons'
+import { HOME_URL } from '@/commons'
 import { useSession } from '@/hooks'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
 const LoginSetPage = () => {
+  return (
+    <Suspense>
+      <LoginSetContent />
+    </Suspense>
+  )
+}
+
+const LoginSetContent = () => {
   const searchParams = useSearchParams()
   const { saveToken, user } = useSession()
   const router = useRouter()
@@ -19,7 +27,7 @@ const LoginSetPage = () => {
   useEffect(() => {
     if (user) {
       const returnUrl = searchParams.get('returnUrl')
-      router.replace(returnUrl || ORGANIZATION_URL) //TODO: revisar la redirección por default
+      router.replace(returnUrl || HOME_URL)
     }
   }, [user, router, searchParams])
 

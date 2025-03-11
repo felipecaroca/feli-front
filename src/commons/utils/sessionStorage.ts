@@ -1,9 +1,9 @@
 import {LOCAL_STORAGE_KEYS} from '@/commons'
 
 
-export const getFromLocalStorage = (key: keyof typeof LOCAL_STORAGE_KEYS) => {
+export const getFromSessionStorage = (key: keyof typeof LOCAL_STORAGE_KEYS) => {
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem(key) || undefined
+    const saved = sessionStorage.getItem(key) || undefined
 
     if(saved === 'undefined') return undefined
 

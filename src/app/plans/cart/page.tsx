@@ -2,7 +2,6 @@
 
 import {
   BoxComponent,
-  ButtonComponent,
   FlexComponent,
   GoogleButtonComponent,
   SkeletonComponent,
@@ -11,9 +10,32 @@ import {
 } from '@/components'
 import styles from './styles.module.css'
 import { useCartPage } from '@/hooks'
+import { Payment, initMercadoPago } from '@mercadopago/sdk-react'
+import { useEffect } from 'react'
 
 const PlansCardPage = () => {
-  const { apps, subTotal, total, iva, loading, user } = useCartPage()
+  const {
+    apps,
+    subTotal,
+    total,
+    iva,
+    loading,
+    user,
+    onPay,
+    isInitialized,
+    setIsInitialized,
+  } = useCartPage()
+
+  useEffect(() => {
+    if (
+      !isInitialized &&
+      process.env.NEXT_PUBLIC_MERCAROPAGO_KEY &&
+      typeof setIsInitialized === 'function'
+    ) {
+      initMercadoPago(process.env.NEXT_PUBLIC_MERCAROPAGO_KEY)
+      setIsInitialized(true)
+    }
+  }, [setIsInitialized, isInitialized])
 
   return (
     <BoxComponent>
@@ -54,8 +76,27 @@ const PlansCardPage = () => {
             </FlexComponent>
 
             <BoxComponent width="300px" padding="20px 0 0 0">
-              {user ? (
-                <ButtonComponent>Contratar</ButtonComponent>
+              {user?.email && total > 0 && typeof onPay === 'function' ? (
+                <Payment
+                  initialization={{
+                    payer: {
+                      email: user.email,
+                    },
+                    amount: total,
+                  }}
+                  customization={{
+                    paymentMethods: {
+                      creditCard: 'all',
+                      debitCard: 'all',
+                      mercadoPago: 'all',
+                    },
+                  }}
+                  onSubmit={async ({ formData }) => {
+                    onPay(formData)
+                  }}
+                  onReady={console.log}
+                  onError={console.log}
+                />
               ) : (
                 <GoogleButtonComponent returnUrl="/plans/cart">
                   Registrate con google

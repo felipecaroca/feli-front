@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['@chakra-ui/react']
   },
   images: {
-    domains: ['upload.wikimedia.org'] // TODO: cambiar al dominio donde se subirán las imagenes
+    domains: ['upload.wikimedia.org', 'lh3.googleusercontent.com'] // TODO: cambiar al dominio donde se subirán las imagenes
   }
 }
 

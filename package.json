@@ -15,7 +15,7 @@
     "@chakra-ui/react": "^3.5.1",
     "@emotion/react": "^11.14.0",
     "@hookform/resolvers": "^3.10.0",
-    "@react-oauth/google": "^0.12.1",
+    "@mercadopago/sdk-react": "^0.0.23",
     "axios": "^1.7.9",
     "jotai": "^2.11.1",
     "next": "^15.1.6",

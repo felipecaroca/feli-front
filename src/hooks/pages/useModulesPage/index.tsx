@@ -1,8 +1,8 @@
 'use client'
 
 import { ModuleModel, organizationAtom, SaveModInput } from '@/commons'
-import { useModulesCRUD } from '@/hooks'
-import { useDisclosure } from '@chakra-ui/react'
+import { useDisclosure, useModulesCRUD } from '@/hooks'
+
 import { useAtomValue } from 'jotai'
 import { useEffect, useState } from 'react'
 

@@ -1,0 +1,68 @@
+.closeButton {
+  border: 1px solid #a1a1a1;
+  padding: 5px;
+  border-radius: 100%;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.closeButton:active {
+  opacity: 0.8;
+}
+
+.drawer {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  z-index: -1;
+  opacity: 0;
+  display: flex;
+  transition:
+    opacity 0.3s ease-in-out,
+    z-index 0.3s ease-in-out;
+}
+
+.drawerVisible {
+  z-index: 99;
+  opacity: 1;
+}
+
+.drawer > div {
+  position: relative;
+  border-radius: 10px;
+  padding: 20px;
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+}
+
+.drawerVisible > div {
+  transform: translateX(0);
+}
+
+.drawerHiding {
+  opacity: 0;
+}
+
+.drawerHiding > div {
+  transform: translateX(100%);
+}

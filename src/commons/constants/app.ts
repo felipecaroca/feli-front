@@ -2,6 +2,7 @@ export const IVA_VALUE = 0.19
 
 export const WAITINGLINE_URL = '/waitingline'
 export const ORGANIZATION_URL = '/organization'
+export const HOME_URL = '/home'
 
 export const MAX_MODULES_ALLOWED = 5
 export const MAX_ORGANIZATIONS_ALLOWED = 2

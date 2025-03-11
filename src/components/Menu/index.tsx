@@ -1,27 +1,9 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { ComponentProps, MenuItemType } from './types'
-import {
-  DrawerBackdrop,
-  DrawerBody,
-  DrawerCloseTrigger,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerRoot,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer'
 
-import { Box, Flex, Link as ChakraLink, Text } from '@chakra-ui/react'
-import { Avatar } from '@/components/ui/avatar'
-import {
-  AccordionItem,
-  AccordionItemContent,
-  AccordionItemTrigger,
-  AccordionRoot,
-} from '@/components/ui/accordion'
+import { Link as ChakraLink, Text } from '@chakra-ui/react'
 
 import { useAtom } from 'jotai'
 import { menuAtom } from '@/commons'
@@ -29,65 +11,63 @@ import { sections } from './constants'
 import Link from 'next/link'
 import { OrganizationHandlerComponent } from '../OrganizationHandler'
 import { ButtonComponent } from '../Button'
+import LoggedUserComponent from '../LoggedUserComponent'
+import { DrawerComponent } from '../Drawer'
+import { useDisclosure } from '@/hooks'
+import { BoxComponent } from '../Box'
+import { CollapseComponent } from '../Collapse'
 
 export const MenuComponent: FC<ComponentProps> = ({ user, logout }) => {
   const [menuKey, setMenuKey] = useAtom(menuAtom)
   const onMenuClick = (item: MenuItemType) => setMenuKey(item.id)
 
+  const { open, onOpen, onClose } = useDisclosure()
+  const defaultIndex = sections.findIndex(
+    (item) => (menuKey?.split('-')?.[0] || '') === item.value
+  )
+
+  const [indexOpen, setIndexOpen] = useState<number | undefined>(
+    defaultIndex >= 0 ? defaultIndex : undefined
+  )
+
   return (
-    <DrawerRoot>
-      <DrawerBackdrop />
-      <DrawerTrigger asChild>
-        <ButtonComponent>Menu</ButtonComponent>
-      </DrawerTrigger>
-      <DrawerContent offset="4" rounded="md">
-        <DrawerHeader borderBottom="1px solid" borderBottomColor="gray.300">
-          <Flex gap={2} alignItems="center">
-            <Avatar name={user?.name} src={user?.picture} />
-            <Box>
-              <DrawerTitle>{user?.name}</DrawerTitle>
-              <Text>{user?.email}</Text>
-            </Box>
-          </Flex>
-          <OrganizationHandlerComponent />
-        </DrawerHeader>
-        <DrawerBody>
-          <AccordionRoot
-            collapsible
-            defaultValue={[menuKey?.split('-')?.[0] || '']}
-          >
-            {sections.map((section, index) => (
-              <AccordionItem key={index} value={section.value}>
-                <AccordionItemTrigger>{section.title}</AccordionItemTrigger>
-                <AccordionItemContent>
-                  {section.items?.map((item) => (
-                    <ChakraLink
-                      asChild
-                      bg={menuKey === item.id ? 'gray.100' : ''}
-                      w="full"
-                      key={item.id}
-                      p="5px"
-                    >
-                      <Link
-                        href={item.onClick}
-                        onClick={() => onMenuClick(item)}
-                      >
-                        <Text w="full" textAlign="left">
-                          {item?.name}
-                        </Text>
-                      </Link>
-                    </ChakraLink>
-                  ))}
-                </AccordionItemContent>
-              </AccordionItem>
-            ))}
-          </AccordionRoot>
-        </DrawerBody>
-        <DrawerFooter>
-          <ButtonComponent onClick={logout}>Cerrar sesión</ButtonComponent>
-        </DrawerFooter>
-        <DrawerCloseTrigger />
-      </DrawerContent>
-    </DrawerRoot>
+    <>
+      <BoxComponent padding="10px">
+        <ButtonComponent onClick={onOpen}>Menu</ButtonComponent>
+      </BoxComponent>
+      <DrawerComponent {...{ open, onClose }}>
+        <LoggedUserComponent {...{ user }} />
+        <OrganizationHandlerComponent />
+
+        {sections.map((section, index) => (
+          <div key={index}>
+            <BoxComponent padding="10px" onClick={() => setIndexOpen(index)}>
+              {section.title}
+            </BoxComponent>
+            <CollapseComponent open={indexOpen === index}>
+              <BoxComponent padding="10px">
+                {section.items?.map((item) => (
+                  <ChakraLink
+                    asChild
+                    bg={menuKey === item.id ? 'gray.100' : ''}
+                    w="full"
+                    key={item.id}
+                    p="5px"
+                  >
+                    <Link href={item.onClick} onClick={() => onMenuClick(item)}>
+                      <Text w="full" textAlign="left">
+                        {item?.name}
+                      </Text>
+                    </Link>
+                  </ChakraLink>
+                ))}
+              </BoxComponent>
+            </CollapseComponent>
+          </div>
+        ))}
+
+        <ButtonComponent onClick={logout}>Cerrar sesión</ButtonComponent>
+      </DrawerComponent>
+    </>
   )
 }

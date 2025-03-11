@@ -1,0 +1,13 @@
+.collapse {
+  width: 100%;
+  transition: max-height 0.4s ease-in-out;
+  overflow-y: hidden;
+}
+
+.visible {
+  max-height: 500px;
+}
+
+.hidden {
+  max-height: 0;
+}

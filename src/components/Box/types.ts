@@ -8,4 +8,5 @@ export type ComponentProps = {
   zIndex?: number
   position?: PositionType
   top?: PixelOrPercent
+  onClick?():void
 } & WithChildren

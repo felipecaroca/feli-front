@@ -9,9 +9,11 @@ export const BoxComponent: FC<ComponentProps> = ({
   zIndex,
   position,
   top,
+  onClick,
 }) => {
   return (
     <div
+      onClick={onClick}
       style={{
         width,
         height,
@@ -19,6 +21,7 @@ export const BoxComponent: FC<ComponentProps> = ({
         zIndex,
         position,
         top,
+        cursor: onClick ? 'pointer' : 'default',
       }}
     >
       {children}

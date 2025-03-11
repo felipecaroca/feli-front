@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { getFromLocalStorage } from '../utils'
+import { getFromSessionStorage } from '../utils'
 
 const getHeaders = () => {
-  const token = JSON.parse((getFromLocalStorage('AUTH_TOKEN') || '""'))
+  const token = JSON.parse((getFromSessionStorage('AUTH_TOKEN') || '""'))
   return {
     Authorization: `Bearer ${token}`
   }

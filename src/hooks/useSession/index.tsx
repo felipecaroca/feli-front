@@ -3,7 +3,6 @@
 import { authTokenAtom, authUserAtom, getMe } from '@/commons'
 import { useAtom } from 'jotai'
 import { useRouter } from 'next/navigation'
-import { googleLogout } from '@react-oauth/google'
 
 import { useEffect } from 'react'
 
@@ -21,17 +20,19 @@ export const useSession = (noRedirect?: boolean) => {
   useEffect(() => {
     if (token) {
       getMe()
-        .then((res) => setUser(res))
+        .then(({ user, idToken }) => {
+          setUser(user)
+          if (idToken) setToken(idToken)
+        })
         .catch(() => !noRedirect && goToLogin())
     } else if (!noRedirect) goToLogin()
   }, [token])
 
   return {
     user,
-    token: token,
+    token,
     saveToken: (token: string) => setToken(token),
     logout: () => {
-      googleLogout()
       setUser(undefined)
       setToken(undefined)
     },
